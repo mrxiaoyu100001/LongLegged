@@ -22,8 +22,9 @@ import android.util.TypedValue;
 
 /**
  * 系统屏幕的一些操作<br>
- * @version 1.1
- * @author zm
+ *
+ * @author xiaoyu
+ * @version 1.0
  */
 public final class DensityUtils {
 
@@ -36,6 +37,18 @@ public final class DensityUtils {
                 dpValue, r.getDisplayMetrics());
         return (int) px;
     }
+
+    /**
+     * @param context
+     * @param size
+     * @return
+     */
+    public static int dip2dp(Context context, int size) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                size,
+                context.getResources().getDisplayMetrics());
+    }
+
 
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp

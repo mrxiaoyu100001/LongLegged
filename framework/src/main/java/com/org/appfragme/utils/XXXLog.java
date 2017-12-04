@@ -2,7 +2,7 @@ package com.org.appfragme.utils;
 
 import android.util.Log;
 
-public final class XgoLog {
+public final class XXXLog {
 
 	/** 是否允许输出log
 	 *  -1：  不允许
@@ -39,7 +39,7 @@ public final class XgoLog {
 
 	public static final int LEVEL_ERROR = 5;
 
-	private XgoLog() throws InstantiationException {
+	private XXXLog() throws InstantiationException {
 		throw new InstantiationException("This class is not created for instantiation");
 	}
 

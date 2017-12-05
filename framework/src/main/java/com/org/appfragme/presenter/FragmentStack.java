@@ -1,14 +1,18 @@
 package com.org.appfragme.presenter;
 
+import android.nfc.Tag;
 import android.support.v4.app.Fragment;
+
+import com.org.appfragme.utils.XXXLog;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * @Created: xiaoyu  on 2017.12.04 15:20.
- * @Describe：界面工厂
+ * @Describe：FragmentPresenter工厂
  * @Review：
  * @Modify：
  * @Version: v_1.0 on 2017.12.04 15:20.
@@ -21,58 +25,73 @@ import java.util.Map;
 public class FragmentStack {
 
     private Map<Class, FragmentPresenter> fragments;
-    private String Tag = " AppFactory ";
-    private static AppFactory instance;
+    private static String Tag = " FragmentStack ";
+    private static FragmentStack instance;
 
-    private FragmentStack() {
-        //界面应该不超过300个
-        fragments = new HashMap<>(300);
+    /**
+     *
+     * @param stack
+     */
+    private FragmentStack(int stack) {
+        fragments = new HashMap<>(stack);
     }
 
     /**
      * 这个东西不知道有没有用，暂时先写上。
-     *
+     * @param stack
      * @return
      */
-    public static AppFactory getFactory() {
+    public static FragmentStack getFragmentStack(int stack) {
         if (instance == null) {
-            synchronized (AppFactory.class) {
+            synchronized (FragmentStack.class) {
                 if (instance == null) {
-                    instance = new AppFactory();
+                    instance = new FragmentStack(stack);
+                    XXXLog.i(Tag + "init success!");
                 }
             }
         }
         return instance;
     }
 
+//    private T newInstance(Class<T> cla) throws Exception{
+//
+//    }
+
     /**
      * 加入fragment队列里面
      * @param cla
      * @return
      */
-    private boolean addFragment(Class cla){
+    public FragmentPresenter addFragment(Class<?> cla){
         if (!quaryFragment(cla)){
             if (fragments != null){
                 try {
                     fragments.put(cla, (FragmentPresenter) cla.newInstance());
+                    XXXLog.i(Tag + "add success!");
+                    return getFragment(cla);
                 } catch (InstantiationException e) {
                     e.printStackTrace();
-                    return false;
+                    XXXLog.i(Tag + "InstantiationException");
+                    return null;
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                    return false;
+                    XXXLog.i(Tag + "IllegalAccessException");
+                    return null;
                 }
             }
+        }else {
+            XXXLog.i(Tag + "get fragment");
+            return getFragment(cla);
         }
-        return false;
+        return null;
     }
 
     /**
-     * 移除相应的界面
+     * 移除相应的FragmentPresenter
      * @param cla
      * @return
      */
-    private boolean removeFragment(Class<?> cla){
+    public boolean removeFragment(Class<?> cla){
         if (fragments != null){
             if (quaryFragment(cla)){
                 fragments.remove(cla);
@@ -83,10 +102,10 @@ public class FragmentStack {
     }
 
     /**
-     * 删除全部的界面
+     * 删除全部的FragmentPresenter
      * @return
      */
-    private boolean removeAllFragment(){
+    public boolean removeAllFragment(){
         if (fragments != null){
             Iterator<Class> iter = fragments.keySet().iterator();
             while (iter.hasNext()){
@@ -99,20 +118,23 @@ public class FragmentStack {
     }
 
     /**
-     * 更新相应的界面
+     * 更新相应的FragmentPresenter
      * @param cla
      * @return
      */
-    private boolean updateFragment(Class<?> cla){
+    public boolean updateFragment(Class<?> cla){
+        if (quaryFragment(cla)){
+//            fragments.put(cla, )
+        }
         return false;
     }
 
     /**
-     * 查询相应界面
+     * 查询相应FragmentPresenter
      * @param cla
      * @return
      */
-    private boolean quaryFragment(Class<?> cla){
+    public boolean quaryFragment(Class<?> cla){
         if (fragments != null){
             return fragments.containsKey(cla);
         }
@@ -120,14 +142,16 @@ public class FragmentStack {
     }
 
     /**
-     * 获取相应的界
+     * 获取相应的FragmentPresenter
      * @param cla
      * @return
      */
-    private Fragment getFragment(Class<?> cla){
+    public FragmentPresenter getFragment(Class<?> cla){
         if (fragments != null){
+            XXXLog.i(Tag + "get fragment success!");
             return fragments.get(cla);
         }
+        XXXLog.e(Tag + " get fragment fail!");
         return null;
     }
 

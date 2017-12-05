@@ -36,6 +36,7 @@ import com.org.appfragme.view.IDelegate;
  */
 public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     public T viewDelegate;
+    public FragmentPresenter(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

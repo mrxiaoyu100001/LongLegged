@@ -26,7 +26,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.org.appfragme.R;
 import com.org.appfragme.presenter.ActivityPresenter;
+import com.org.appfragme.utils.XXXLog;
 
 
 /**
@@ -39,6 +41,7 @@ public abstract class AppDelegate implements IDelegate {
     protected final SparseArray<View> mViews = new SparseArray<View>();
 
     protected View rootView;
+    private int changeView;
 
     public abstract int getRootLayoutId();
 
@@ -106,20 +109,21 @@ public abstract class AppDelegate implements IDelegate {
     /**
      * 界面跳转
      *
+     * @param resView
      * @param mFragment
      */
     public void changeFragment(int resView, Fragment mFragment) {
-
         if (mFragment.equals(currentFragment)) {
             return;
         }
         FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
         if (!mFragment.isAdded()) {
             transaction.add(resView, mFragment, mFragment.getClass()
                     .getName());
             /*添加回退栈*/
-//            transaction.addToBackStack(mFragment.getClass()
-//                    .getName());
+            transaction.addToBackStack(mFragment.getClass()
+                    .getName());
         }
         if (mFragment.isHidden()) {
             transaction.show(mFragment);
@@ -130,5 +134,4 @@ public abstract class AppDelegate implements IDelegate {
         currentFragment = mFragment;
         transaction.commit();
     }
-
 }

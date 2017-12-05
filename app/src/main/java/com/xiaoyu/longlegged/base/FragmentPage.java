@@ -1,10 +1,12 @@
 package com.xiaoyu.longlegged.base;
 
 import com.xiaoyu.longlegged.fragment.MainFragment;
+import com.xiaoyu.longlegged.fragment.SearchFragment;
+import com.xiaoyu.longlegged.fragment.WelcomeFrament;
 
 /**
  * @Created by xiaoyu on 2017/1/6.
- * @Describe：跳转Fragment的枚举类
+ * @Describe：fragment枚举清单列表
  * @Review by：
  * @Modify by：
  * @Version : $ v_1.0 on 2017/1/6.
@@ -14,7 +16,9 @@ public enum FragmentPage {
 
     /*每个人的key 按自己的顺序排列 以下只是一个简单的例子，请各位做相应的替换*/
     /*@author: xiaoyu    1 - 100      */
-    Main(1, MainFragment.class);
+    Wellcome(1, WelcomeFrament.class),
+    Main(2, MainFragment.class),
+    Search(3, SearchFragment.class);
     private Class<?> clazz;
     private int value;
 

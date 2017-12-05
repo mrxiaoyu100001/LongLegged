@@ -5,7 +5,7 @@ package com.org.appfragme.utils;
  * @Describe：常量工具类
  * @Review by：
  * @Modify by：
- * @Version : $ v_2.2.0 on 2016/11/9.
+ * @Version : $ v_1.0 on 2016/11/9.
  * @Remark:
  */
 public class Constant {

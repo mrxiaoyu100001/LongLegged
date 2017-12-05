@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:titlebar="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.org.appfragme.widget.TitleBar
+        android:id="@+id/frag_tb_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/icon_chosen_title_bg"/>
+
+    <com.org.appfragme.widget.CommonTitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        titlebar:centerSubText="无线研发部"
+        titlebar:centerText="标题栏"
+        titlebar:centerType="textView"
+        titlebar:leftType="imageButton"
+        titlebar:rightText="确定"
+        titlebar:rightType="textView" />
 
 </LinearLayout>

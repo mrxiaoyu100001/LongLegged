@@ -8,7 +8,7 @@ import com.org.appfragme.presenter.ActivityStack;
 
 /**
  * Toast工具类，用于优化Toast提示
- * Created by zm on 2016/4/27.
+ * Created by xiaoyu on 2016/4/27.
  */
 public class ViewInject {
 

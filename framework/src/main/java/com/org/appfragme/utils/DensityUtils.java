@@ -15,10 +15,17 @@
  */
 package com.org.appfragme.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
+import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
+import java.lang.reflect.Field;
 
 /**
  * 系统屏幕的一些操作<br>
@@ -27,6 +34,13 @@ import android.util.TypedValue;
  * @version 1.0
  */
 public final class DensityUtils {
+
+    public static float dp2px(Context context, float dp) {
+        if (context == null) {
+            return -1;
+        }
+        return dp * density(context);
+    }
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
@@ -66,12 +80,48 @@ public final class DensityUtils {
         return (int) (pxValue / fontScale + 0.5f);
     }
 
+    public static float px2dp(Context context, float px) {
+        if (context == null) {
+            return -1;
+        }
+        return px / density(context);
+    }
+
     /**
      * 根据手机的分辨率从 sp 的单位 转成为 px
      */
     public static int sp2px(Context context, float spValue) {
         float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
+    }
+
+    /**
+     * 根据手机的分辨率从 dip 的单位 转成为 sp
+     *
+     * @param context
+     * @param dipValue
+     * @return
+     */
+    public static int dip2sp(Context context, float dipValue) {
+        Resources r = context.getResources();
+        float pxValue = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dipValue, r.getDisplayMetrics());
+        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
+
+    public static float density(Context context) {
+        return context.getResources().getDisplayMetrics().density;
+    }
+
+
+    public static int dp2PxInt(Context context, float dp) {
+        return (int) (dp2px(context, dp) + 0.5f);
+    }
+
+    public static float px2DpCeilInt(Context context, float px) {
+        return (int) (px2dp(context, px) + 0.5f);
     }
 
     /**
@@ -100,4 +150,69 @@ public final class DensityUtils {
         DisplayMetrics dm = aty.getResources().getDisplayMetrics();
         return dm.heightPixels;
     }
+
+    public static int getScreenWidth(Context context) {
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight(Context context) {
+        return context.getResources().getDisplayMetrics().heightPixels;
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        int statusBarHeight = 0;
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return statusBarHeight;
+    }
+
+    public static int getAppInScreenheight(Context context) {
+        return getScreenHeight(context) - getStatusBarHeight(context);
+    }
+
+    public static DisplayMetrics getDisplayMetrics(Context context) {
+        Activity activity;
+        if (!(context instanceof Activity) && context instanceof ContextWrapper) {
+            activity = (Activity) ((ContextWrapper) context).getBaseContext();
+        } else {
+            activity = (Activity) context;
+        }
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        return metrics;
+    }
+
+    /**
+     * 获取屏幕大小
+     *
+     * @param context
+     * @return
+     */
+    public static int[] getScreenPixelSize(Context context) {
+        DisplayMetrics metrics = getDisplayMetrics(context);
+        return new int[]{metrics.widthPixels, metrics.heightPixels};
+    }
+
+
+    public static void hideSoftInputKeyBoard(Context context, View focusView) {
+        if (focusView != null) {
+            IBinder binder = focusView.getWindowToken();
+            if (binder != null) {
+                InputMethodManager imd = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imd.hideSoftInputFromWindow(binder, InputMethodManager.HIDE_IMPLICIT_ONLY);
+            }
+        }
+    }
+    public static void showSoftInputKeyBoard(Context context, View focusView) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(focusView, InputMethodManager.SHOW_FORCED);
+    }
+
 }

@@ -2,6 +2,18 @@ package com.org.appfragme.utils;
 
 import android.util.Log;
 
+/**
+ * @Created: xiaoyu  on 2017.12.04 15:20.
+ * @Describe：LOG
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.04 15:20.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
+ */
+
 public final class XXXLog {
 
 	/** 是否允许输出log
@@ -12,7 +24,7 @@ public final class XXXLog {
 
 	/** 日志输出时的TAG */
 
-	private static String mTag = "xgo";
+	private static String mTag = "XXXLog";
 
 
 	/** 日志输出级别NONE */

@@ -1,9 +1,10 @@
 package com.xiaoyu.longlegged.delegate;
 
-import com.org.appfragme.utils.DensityUtils;
 import com.org.appfragme.view.AppDelegate;
-import com.org.appfragme.widget.TitleBar;
+import com.xiaoyu.longlegged.MyApplication;
 import com.xiaoyu.longlegged.R;
+import com.xiaoyu.longlegged.base.FragmentPage;
+import com.xiaoyu.longlegged.base.Mediator;
 
 /**
  * @Created: xiaoyu  on 2017.12.01 16:57.
@@ -17,9 +18,7 @@ import com.xiaoyu.longlegged.R;
  * @Remark:
  */
 
-public class MainDelegate extends AppDelegate {
-
-    private TitleBar tb_title;
+public class MainDelegate extends AppDelegate implements Mediator {
 
     @Override
     public int getRootLayoutId() {
@@ -29,8 +28,12 @@ public class MainDelegate extends AppDelegate {
     @Override
     public void initWidget() {
         super.initWidget();
-        tb_title = bindView(R.id.act_tb_title);
-        tb_title.setTitle(getActivity().getString(R.string.app_name));
-        tb_title.setHeight(DensityUtils.dip2dp(this.getActivity(), 44));
+       changePage(FragmentPage.Wellcome);
+    }
+
+    @Override
+    public void changePage(FragmentPage page) {
+        Class cla = FragmentPage.getPageByValue(page.getValue());
+        changeFragment(R.id.act_fl_content,  MyApplication.fragmentStack.addFragment(cla));
     }
 }

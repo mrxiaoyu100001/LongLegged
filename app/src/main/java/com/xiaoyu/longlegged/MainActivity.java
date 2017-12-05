@@ -19,4 +19,14 @@ public class MainActivity extends DataBindActivity<MainDelegate> {
     protected Class<MainDelegate> getDelegateClass() {
         return MainDelegate.class;
     }
+
+    public MainDelegate getDelegate(){
+        return viewDelegate;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        MyApplication.fragmentStack.removeAllFragment();
+    }
 }

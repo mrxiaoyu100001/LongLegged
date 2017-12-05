@@ -2,7 +2,7 @@ package com.xiaoyu.longlegged.base;
 
 /**
  * @Created: xiaoyu  on 2017.12.04 18:14.
- * @Describe：
+ * @Describe：调停者模式
  * @Review：
  * @Modify：
  * @Version: v_1.0 on 2017.12.04 18:14.
@@ -12,5 +12,6 @@ package com.xiaoyu.longlegged.base;
  * @Remark:
  */
 
-public class Mediator {
+public interface Mediator{
+    public void changePage(FragmentPage page);
 }

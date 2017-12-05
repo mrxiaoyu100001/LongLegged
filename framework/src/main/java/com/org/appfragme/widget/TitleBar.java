@@ -167,7 +167,6 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
     private void setTitle(CharSequence title, CharSequence subTitle, int orientation) {
         mCenterLayout.setOrientation(orientation);
         mCenterText.setText(title);
-
         mSubTitleText.setText(subTitle);
         mSubTitleText.setVisibility(View.VISIBLE);
     }

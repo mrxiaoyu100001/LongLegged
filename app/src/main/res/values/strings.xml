@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">长腿公社</string>
+    <string name="main_title">长腿公社</string>
+    <string name="main_sub">搜索</string>
 </resources>

@@ -13,4 +13,17 @@ package com.org.appfragme.presenter;
  */
 
 public class AppBuilder {
+
+    private AppBuilder(){
+        throw new Error("ClassNotInitException");
+    }
+
+    /**
+     *
+     * @param stack
+     * @return
+     */
+    public static FragmentStack init(int stack){
+        return FragmentStack.getFragmentStack(stack);
+    }
 }

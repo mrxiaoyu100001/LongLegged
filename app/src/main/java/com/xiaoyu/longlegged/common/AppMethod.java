@@ -1,7 +1,9 @@
 package com.xiaoyu.longlegged.common;
 
 import android.app.Activity;
+import android.os.Bundle;
 
+import com.org.appfragme.databind.CallBack;
 import com.xiaoyu.longlegged.MainActivity;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.delegate.MainDelegate;
@@ -25,7 +27,6 @@ public class AppMethod {
     }
 
     /**
-     * 界面跳转
      * @param context
      * @param page
      */
@@ -34,4 +35,46 @@ public class AppMethod {
         MainDelegate mainDelegate = activity.getDelegate();
         mainDelegate.changePage(page);
     }
+
+    /**
+     * @param context
+     * @param page
+     * @param bundle
+     */
+    public static void postShowWith(Activity context, FragmentPage page,
+                                    Bundle bundle) {
+        MainActivity activity = (MainActivity) context;
+        MainDelegate mainDelegate = activity.getDelegate();
+        mainDelegate.changePage(page, bundle);
+    }
+
+    /**
+     * 本来觉得用观察者模式去封装，怕别人看不懂，所以不用了直接就用界面来回的切换
+     * 数据来回的传递吧，简单直接粗暴。
+     * @param context
+     * @param page
+     * @param resultCode
+     * @param callBack
+     */
+    public static void postShowWith(Activity context, FragmentPage page,
+                                    int resultCode, CallBack callBack) {
+        MainActivity activity = (MainActivity) context;
+        MainDelegate mainDelegate = activity.getDelegate();
+        mainDelegate.changePage(page, resultCode, callBack);
+    }
+
+    /**
+     * @param context
+     * @param page
+     * @param bundle
+     * @param resultCode
+     * @param callBack
+     */
+    public static void postShowWith(Activity context, FragmentPage page,
+                                    Bundle bundle, int resultCode, CallBack callBack) {
+        MainActivity activity = (MainActivity) context;
+        MainDelegate mainDelegate = activity.getDelegate();
+        mainDelegate.changePage(page, bundle, resultCode, callBack);
+    }
+
 }

@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.widget.Toolbar;
 import android.view.Menu;
 
+import com.org.appfragme.utils.AnnotateUtil;
 import com.org.appfragme.view.IDelegate;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 
@@ -50,8 +51,7 @@ public abstract class ActivityPresenter<T extends IDelegate> extends RxFragmentA
         ActivityStack.create().addActivity(this);
         viewDelegate.create(getLayoutInflater(), null, savedInstanceState);
         setContentView(viewDelegate.getRootView());
-        initToolbar();
-        viewDelegate.initWidget();
+        viewDelegate.initWidget(viewDelegate.getRootView());
         bindEvenListener();
     }
 

@@ -36,6 +36,8 @@ public interface IDelegate {
 
     View getRootView();
 
-    void initWidget();
+    void initWidget(View contentView);
+
+    void widgetClick(View view);
 
 }

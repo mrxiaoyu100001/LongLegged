@@ -29,7 +29,7 @@ import com.org.appfragme.view.IDelegate;
  * @author kymjs (http://www.kymjs.com/) on 10/26/15.
  */
 public abstract class DataBindFragment<T extends IDelegate> extends
-        FragmentPresenter<T> {
+        FragmentPresenter<T> implements CallBack {
 
     protected DataBinder binder;
 
@@ -44,5 +44,10 @@ public abstract class DataBindFragment<T extends IDelegate> extends
     public <D extends IModel> void notifyModelChanged(D data) {
         if (binder != null)
             binder.viewBindModel(viewDelegate, data);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
+
     }
 }

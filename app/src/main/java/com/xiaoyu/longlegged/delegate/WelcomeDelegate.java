@@ -35,8 +35,8 @@ public class WelcomeDelegate extends AppDelegate {
     }
 
     @Override
-    public void initWidget() {
-        super.initWidget();
+    public void initWidget(View contentView) {
+        super.initWidget(contentView);
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override

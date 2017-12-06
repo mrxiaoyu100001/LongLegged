@@ -705,6 +705,16 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
     }
 
     /**
+     * 设置背景图片
+     * @param resId
+     */
+    public void setStatusBarPic(int resId){
+        if(viewStatusBarFill != null){
+            viewStatusBarFill.setBackgroundResource(resId);
+        }
+    }
+
+    /**
      * 是否填充状态栏
      *
      * @param show

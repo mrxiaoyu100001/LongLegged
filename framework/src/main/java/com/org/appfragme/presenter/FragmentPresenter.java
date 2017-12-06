@@ -24,6 +24,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.org.appfragme.utils.AnnotateUtil;
+import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.IDelegate;
 
 
@@ -36,7 +38,9 @@ import com.org.appfragme.view.IDelegate;
  */
 public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     public T viewDelegate;
-    public FragmentPresenter(){}
+
+    public FragmentPresenter() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        initData(getArguments());
         viewDelegate.create(inflater, container, savedInstanceState);
         return viewDelegate.getRootView();
     }
@@ -62,19 +67,15 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewDelegate.initWidget();
+        viewDelegate.initWidget(viewDelegate.getRootView());
         bindEvenListener();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initata();
+    protected void initData(Bundle bundle) {
     }
 
-    protected void initata(){}
-
-    protected void bindEvenListener() {}
+    protected void bindEvenListener() {
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

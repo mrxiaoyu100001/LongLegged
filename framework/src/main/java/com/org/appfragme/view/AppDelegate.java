@@ -28,6 +28,7 @@ import android.widget.Toolbar;
 
 import com.org.appfragme.R;
 import com.org.appfragme.presenter.ActivityPresenter;
+import com.org.appfragme.utils.AnnotateUtil;
 import com.org.appfragme.utils.XXXLog;
 
 
@@ -37,11 +38,9 @@ import com.org.appfragme.utils.XXXLog;
  *
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class AppDelegate implements IDelegate {
+public abstract class AppDelegate implements IDelegate, View.OnClickListener {
     protected final SparseArray<View> mViews = new SparseArray<View>();
-
     protected View rootView;
-    private int changeView;
 
     public abstract int getRootLayoutId();
 
@@ -73,7 +72,18 @@ public abstract class AppDelegate implements IDelegate {
     }
 
     @Override
-    public void initWidget() {
+    public void initWidget(View contentView) {
+
+    }
+
+    @Override
+    public void widgetClick(View view) {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        widgetClick(view);
     }
 
     public <T extends View> T bindView(int id) {

@@ -1,9 +1,11 @@
 package com.xiaoyu.longlegged.delegate;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.org.appfragme.utils.BindView;
+import com.org.appfragme.utils.Constant;
 import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.AppDelegate;
 import com.xiaoyu.longlegged.R;
@@ -47,7 +49,12 @@ public class SearchDelegate extends AppDelegate implements View.OnClickListener 
         if (view.getId() == R.id.frag_tv_sub) {
             AppMethod.postShowWith(this.getActivity(), FragmentPage.Detail);
         }else if (view.getId() == R.id.frag_tv_sub2){
-
+            AppMethod.postShowWith(this.getActivity(),FragmentPage.Detail, Constant.Constant_one, this);
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

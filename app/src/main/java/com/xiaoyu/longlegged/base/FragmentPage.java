@@ -2,6 +2,7 @@ package com.xiaoyu.longlegged.base;
 
 import com.xiaoyu.longlegged.fragment.DetailFragment;
 import com.xiaoyu.longlegged.fragment.MainFragment;
+import com.xiaoyu.longlegged.fragment.MoreDataFragment;
 import com.xiaoyu.longlegged.fragment.SearchFragment;
 import com.xiaoyu.longlegged.fragment.WelcomeFrament;
 
@@ -20,7 +21,8 @@ public enum FragmentPage {
     Wellcome(1, WelcomeFrament.class),
     Main(2, MainFragment.class),
     Search(3, SearchFragment.class),
-    Detail(4, DetailFragment.class);
+    Detail(4, DetailFragment.class),
+    MoreData(5, MoreDataFragment.class);
     private Class<?> clazz;
     private int value;
 

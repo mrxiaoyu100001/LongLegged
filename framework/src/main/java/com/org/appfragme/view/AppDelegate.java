@@ -27,6 +27,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.org.appfragme.R;
+import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.presenter.ActivityPresenter;
 import com.org.appfragme.utils.AnnotateUtil;
 import com.org.appfragme.utils.XXXLog;
@@ -47,7 +48,7 @@ import com.org.appfragme.utils.XXXLog;
  * @Resources:
  * @Remark:
  */
-public abstract class AppDelegate implements IDelegate, View.OnClickListener {
+public abstract class AppDelegate implements IDelegate, View.OnClickListener, CallBack {
     protected final SparseArray<View> mViews = new SparseArray<View>();
     protected View rootView;
 
@@ -180,4 +181,8 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
         transaction.commit();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
+
+    }
 }

@@ -22,10 +22,15 @@ import com.org.appfragme.presenter.ActivityPresenter;
 import com.org.appfragme.view.IDelegate;
 
 /**
- * 集成数据-视图绑定的Activity基类(Presenter层)
- *
- * @param <T> View层代理类
- * @author kymjs (http://www.kymjs.com/) on 10/23/15.
+ * @Created: xiaoyu  on 2017.12.04 15:20.
+ * @Describe：集成数据-视图绑定的Activity基类(Presenter层)
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.04 15:20.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
  */
 public abstract class DataBindActivity<T extends IDelegate> extends ActivityPresenter<T> {
     protected DataBinder binder;

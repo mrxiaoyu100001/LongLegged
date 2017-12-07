@@ -30,11 +30,22 @@ import com.org.appfragme.view.IDelegate;
 
 
 /**
- * Presenter base class for Fragment
- * Presenter层的实现基类
+ *
  *
  * @param <T> View delegate class type
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
+ */
+
+/**
+ * @Created: xiaoyu  on 2017.12.06 17:34.
+ * @Describe：Presenter base class for Fragment Presenter层的实现基类
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.06 17:34.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
  */
 public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     public T viewDelegate;
@@ -106,4 +117,5 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     }
 
     protected abstract Class<T> getDelegateClass();
+    public abstract boolean onBackEvent();
 }

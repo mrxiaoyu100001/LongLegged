@@ -33,10 +33,19 @@ import com.org.appfragme.utils.XXXLog;
 
 
 /**
- * View delegate base class
- * 视图层代理的基类
- *
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
+ */
+
+/**
+ * @Created: xiaoyu  on 2017.12.06 17:34.
+ * @Describe：View delegate base class 视图层代理的基类
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.06 17:34.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
  */
 public abstract class AppDelegate implements IDelegate, View.OnClickListener {
     protected final SparseArray<View> mViews = new SparseArray<View>();
@@ -122,18 +131,17 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
      * @param resView
      * @param mFragment
      */
-    public void changeFragment(int resView, Fragment mFragment) {
+    public void enterChangeFragment(int resView, Fragment mFragment) {
         if (mFragment.equals(currentFragment)) {
             return;
         }
         FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+        transaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out);
         if (!mFragment.isAdded()) {
             transaction.add(resView, mFragment, mFragment.getClass()
                     .getName());
             /*添加回退栈*/
-            transaction.addToBackStack(mFragment.getClass()
-                    .getName());
+//            transaction.addToBackStack(mFragment.getClass().getName());
         }
         if (mFragment.isHidden()) {
             transaction.show(mFragment);
@@ -144,4 +152,32 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
         currentFragment = mFragment;
         transaction.commit();
     }
+
+    /**
+     * 界面回退
+     * @param resView
+     * @param mFragment
+     */
+    public void outChangeFragment(int resView, Fragment mFragment) {
+        if (mFragment.equals(currentFragment)) {
+            return;
+        }
+        FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out);
+        if (!mFragment.isAdded()) {
+            transaction.add(resView, mFragment, mFragment.getClass()
+                    .getName());
+            /*添加回退栈*/
+//            transaction.addToBackStack(mFragment.getClass().getName());
+        }
+        if (mFragment.isHidden()) {
+            transaction.show(mFragment);
+        }
+        if (currentFragment != null && currentFragment.isVisible()) {
+            transaction.hide(currentFragment);
+        }
+        currentFragment = mFragment;
+        transaction.commit();
+    }
+
 }

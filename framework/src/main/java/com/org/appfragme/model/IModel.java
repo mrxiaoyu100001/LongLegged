@@ -16,10 +16,15 @@
 package com.org.appfragme.model;
 
 /**
- * 用作双向绑定使用
- * Do Model-View two-way binding future use
- *
- * @author kymjs (http://www.kymjs.com/) on 10/23/15.
+ * @Created: xiaoyu  on 2017.12.06 17:34.
+ * @Describe：用作双向绑定使用
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.06 17:34.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
  */
 public interface IModel {
 }

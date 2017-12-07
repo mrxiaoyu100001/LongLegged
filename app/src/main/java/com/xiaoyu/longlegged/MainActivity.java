@@ -27,7 +27,6 @@ public class MainActivity extends DataBindActivity<MainDelegate> {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        MyApplication.fragmentStack.removeAllFragment();
+        viewDelegate.backChange();
     }
 }

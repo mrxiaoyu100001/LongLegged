@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/act_fl_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    xmlns:titlebar="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.org.appfragme.widget.CommonTitleBar
+        android:id="@+id/frag_ct_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        titlebar:centerText="@string/app_name"
+        titlebar:centerTextColor="@color/col_ffffff"
+        titlebar:centerTextSize="18sp"
+        titlebar:titleBarColor="@color/col_A973FB"
+        titlebar:centerType="textView"
+        titlebar:fillStatusBar="true"
+        titlebar:leftType="imageButton"
+        titlebar:leftImageResource="@mipmap/main_left"
+        titlebar:rightImageResource="@mipmap/add_03"
+        titlebar:rightType="imageButton"
+        titlebar:titleBarHeight="44dp" />
+
+    <FrameLayout
+        android:id="@+id/act_fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

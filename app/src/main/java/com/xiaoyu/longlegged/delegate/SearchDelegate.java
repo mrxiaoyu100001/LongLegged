@@ -7,6 +7,8 @@ import com.org.appfragme.utils.BindView;
 import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.AppDelegate;
 import com.xiaoyu.longlegged.R;
+import com.xiaoyu.longlegged.base.FragmentPage;
+import com.xiaoyu.longlegged.common.AppMethod;
 
 import static android.R.attr.id;
 
@@ -35,13 +37,17 @@ public class SearchDelegate extends AppDelegate implements View.OnClickListener 
     public void initWidget(View contentView) {
         super.initWidget(contentView);
         tv_sub = bindView(R.id.frag_tv_sub);
-        tv_sub.setText(R.string.app_default);
         setOnClickListener(this, R.id.frag_tv_sub);
+        setOnClickListener(this, R.id.frag_tv_sub2);
     }
 
     @Override
     public void widgetClick(View view) {
         super.widgetClick(view);
+        if (view.getId() == R.id.frag_tv_sub) {
+            AppMethod.postShowWith(this.getActivity(), FragmentPage.Detail);
+        }else if (view.getId() == R.id.frag_tv_sub2){
 
+        }
     }
 }

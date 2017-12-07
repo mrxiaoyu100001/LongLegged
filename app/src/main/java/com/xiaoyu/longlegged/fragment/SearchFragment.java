@@ -36,6 +36,10 @@ public class SearchFragment extends DataBindFragment<SearchDelegate> {
     @Override
     protected void initData(Bundle bundle) {
         super.initData(bundle);
-        XXXLog.i("看看数据传递过来了吗？   " + bundle.getString(Constant.Constant_key));
+    }
+
+    @Override
+    public boolean onBackEvent() {
+        return false;
     }
 }

@@ -16,7 +16,7 @@ import java.util.LinkedList;
 
 /**
  * 类描述：
- * 创建人：Bob
+ * 创建人：xiaoyu
  * 创建时间：2015/9/25 11:36
  */
 public class TitleBar extends ViewGroup implements View.OnClickListener {

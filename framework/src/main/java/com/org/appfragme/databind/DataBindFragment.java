@@ -23,10 +23,15 @@ import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.view.IDelegate;
 
 /**
- * 集成数据-视图绑定的Fragment基类(Presenter层)
- *
- * @param <T> View层代理类
- * @author kymjs (http://www.kymjs.com/) on 10/26/15.
+ * @Created: xiaoyu  on 2017.12.06 17:34.
+ * @Describe：集成数据-视图绑定的Fragment基类(Presenter层)
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.06 17:34.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
  */
 public abstract class DataBindFragment<T extends IDelegate> extends
         FragmentPresenter<T> implements CallBack {
@@ -49,5 +54,10 @@ public abstract class DataBindFragment<T extends IDelegate> extends
     @Override
     public void onActivityResult(int requestCode, int resultCode, Bundle data) {
 
+    }
+
+    @Override
+    public boolean onBackEvent() {
+        return false;
     }
 }

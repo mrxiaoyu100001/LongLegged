@@ -2,22 +2,21 @@ package com.xiaoyu.longlegged.fragment;
 
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.databind.DataBinder;
-import com.org.appfragme.utils.ViewInject;
-import com.xiaoyu.longlegged.delegate.MainFragDelegate;
+import com.xiaoyu.longlegged.delegate.DetailDelegate;
 
 /**
- * @Created: xiaoyu  on 2017.12.04 16:36.
+ * @Created: xiaoyu  on 2017.12.07 10:12.
  * @Describe：
  * @Review：
  * @Modify：
- * @Version: v_1.0 on 2017.12.04 16:36.
+ * @Version: v_1.0 on 2017.12.07 10:12.
  * @Blog:http://blog.csdn.net/noteschapter
  * @Github:https://github.com/mrxiaoyu100001
  * @Resources:
  * @Remark:
  */
 
-public class MainFragment extends DataBindFragment<MainFragDelegate> {
+public class DetailFragment extends DataBindFragment<DetailDelegate> {
 
     @Override
     public DataBinder getDataBinder() {
@@ -25,13 +24,12 @@ public class MainFragment extends DataBindFragment<MainFragDelegate> {
     }
 
     @Override
-    protected Class<MainFragDelegate> getDelegateClass() {
-        return MainFragDelegate.class;
+    protected Class<DetailDelegate> getDelegateClass() {
+        return DetailDelegate.class;
     }
 
     @Override
     public boolean onBackEvent() {
-        ViewInject.longToast("     onBackEvent      !!!");
-        return true;
+        return false;
     }
 }

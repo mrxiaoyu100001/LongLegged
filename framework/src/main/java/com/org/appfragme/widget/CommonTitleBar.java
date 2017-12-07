@@ -85,6 +85,7 @@ import com.org.appfragme.utils.DensityUtils;
  * </declare-styleable>
  * <p/>
  * Created by wuhenzhizao on 16/1/12.
+ * @modify：xiaoyu
  */
 @SuppressWarnings("ResourceType")
 public class CommonTitleBar extends RelativeLayout implements View.OnClickListener {

@@ -6,8 +6,15 @@ import android.content.Context;
 import java.util.Stack;
 
 /**
- * Activity的管理类，运用于Activity的管理以及应用程序的退出
- * Created by zm on 2016/4/27.
+ * @Created: xiaoyu  on 2017.12.06 17:34.
+ * @Describe：Activity的管理类，运用于Activity的管理以及应用程序的退出
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.06 17:34.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
  */
 public class ActivityStack {
     private static Stack<ActivityPresenter> activityStack;

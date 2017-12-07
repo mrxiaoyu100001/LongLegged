@@ -21,4 +21,9 @@ public class WelcomeFrament extends FragmentPresenter<WelcomeDelegate> {
     protected Class<WelcomeDelegate> getDelegateClass() {
         return WelcomeDelegate.class;
     }
+
+    @Override
+    public boolean onBackEvent() {
+        return false;
+    }
 }

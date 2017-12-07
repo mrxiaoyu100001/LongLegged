@@ -22,10 +22,19 @@ import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 /**
- * View delegate base class
- * 视图层代理的接口协议
  *
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
+ */
+/**
+ * @Created: xiaoyu  on 2017.12.06 17:34.
+ * @Describe：View delegate base class 视图层代理的接口协议
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.06 17:34.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
  */
 public interface IDelegate {
     void create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);

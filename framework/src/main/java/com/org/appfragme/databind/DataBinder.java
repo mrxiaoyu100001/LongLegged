@@ -19,9 +19,15 @@ import com.org.appfragme.model.IModel;
 import com.org.appfragme.view.IDelegate;
 
 /**
- * ViewModel实现
- *
- * @author kymjs (http://www.kymjs.com/) on 10/30/15.
+ * @Created: xiaoyu  on 2017.12.06 17:34.
+ * @Describe：ViewModel实现
+ * @Review：
+ * @Modify：
+ * @Version: v_1.0 on 2017.12.06 17:34.
+ * @Blog:http://blog.csdn.net/noteschapter
+ * @Github:https://github.com/mrxiaoyu100001
+ * @Resources:
+ * @Remark:
  */
 public interface DataBinder<T extends IDelegate, D extends IModel> {
 

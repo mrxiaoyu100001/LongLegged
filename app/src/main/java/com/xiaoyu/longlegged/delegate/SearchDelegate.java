@@ -48,13 +48,8 @@ public class SearchDelegate extends AppDelegate implements View.OnClickListener 
         super.widgetClick(view);
         if (view.getId() == R.id.frag_tv_sub) {
             AppMethod.postShowWith(this.getActivity(), FragmentPage.Detail);
-        }else if (view.getId() == R.id.frag_tv_sub2){
-            AppMethod.postShowWith(this.getActivity(),FragmentPage.Detail, Constant.Constant_one, this);
+        } else if (view.getId() == R.id.frag_tv_sub2) {
+            AppMethod.postShowWith(this.getActivity(), FragmentPage.MoreData, Constant.Constant_one);
         }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

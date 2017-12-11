@@ -15,5 +15,5 @@ import android.os.Bundle;
  */
 
 public interface CallBack {
-    public void onActivityResult(int requestCode, int resultCode, Bundle data);
+    public void onActivityResult(int requestCode, Bundle data);
 }

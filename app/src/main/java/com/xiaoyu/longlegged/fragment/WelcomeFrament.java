@@ -1,5 +1,7 @@
 package com.xiaoyu.longlegged.fragment;
 
+import com.org.appfragme.databind.DataBindFragment;
+import com.org.appfragme.databind.DataBinder;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.xiaoyu.longlegged.delegate.WelcomeDelegate;
 
@@ -15,7 +17,11 @@ import com.xiaoyu.longlegged.delegate.WelcomeDelegate;
  * @Remark:
  */
 
-public class WelcomeFrament extends FragmentPresenter<WelcomeDelegate> {
+public class WelcomeFrament extends DataBindFragment<WelcomeDelegate> {
+    @Override
+    public DataBinder getDataBinder() {
+        return null;
+    }
 
     @Override
     protected Class<WelcomeDelegate> getDelegateClass() {

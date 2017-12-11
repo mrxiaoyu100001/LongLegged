@@ -1,6 +1,7 @@
 package com.xiaoyu.longlegged.dataBinder;
 
 import com.org.appfragme.databind.DataBinder;
+import com.org.appfragme.utils.XXXLog;
 import com.xiaoyu.longlegged.delegate.MoreDataDelegate;
 import com.xiaoyu.longlegged.modle.MoreDataList;
 
@@ -20,6 +21,6 @@ public class MoreDataBinder implements DataBinder<MoreDataDelegate, MoreDataList
 
     @Override
     public void viewBindModel(MoreDataDelegate viewDelegate, MoreDataList data) {
-        viewDelegate.
+        viewDelegate.setData(data);
     }
 }

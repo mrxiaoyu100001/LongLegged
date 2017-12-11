@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.databind.DataBinder;
+import com.org.appfragme.utils.XXXLog;
 import com.xiaoyu.longlegged.dataBinder.MoreDataBinder;
 import com.xiaoyu.longlegged.delegate.MoreDataDelegate;
 import com.xiaoyu.longlegged.utils.Data;

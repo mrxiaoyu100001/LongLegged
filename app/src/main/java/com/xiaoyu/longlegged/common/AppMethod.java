@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.org.appfragme.databind.CallBack;
+import com.org.appfragme.databind.DataBindFragment;
+import com.org.appfragme.presenter.FragmentPresenter;
 import com.xiaoyu.longlegged.MainActivity;
+import com.xiaoyu.longlegged.MyApplication;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.delegate.MainDelegate;
 
@@ -54,13 +57,14 @@ public class AppMethod {
      * @param context
      * @param page
      * @param resultCode
-     * @param callBack
      */
     public static void postShowWith(Activity context, FragmentPage page,
-                                    int resultCode, CallBack callBack) {
+                                    int resultCode) {
         MainActivity activity = (MainActivity) context;
         MainDelegate mainDelegate = activity.getDelegate();
-        mainDelegate.changePage(page, resultCode, callBack);
+        FragmentPresenter presenter = MyApplication.fragmentStack.getNextFragment();
+        mainDelegate.setCallBack(presenter);
+        mainDelegate.changePage(page, resultCode);
     }
 
     /**
@@ -68,13 +72,14 @@ public class AppMethod {
      * @param page
      * @param bundle
      * @param resultCode
-     * @param callBack
      */
     public static void postShowWith(Activity context, FragmentPage page,
-                                    Bundle bundle, int resultCode, CallBack callBack) {
+                                    Bundle bundle, int resultCode) {
         MainActivity activity = (MainActivity) context;
         MainDelegate mainDelegate = activity.getDelegate();
-        mainDelegate.changePage(page, bundle, resultCode, callBack);
+        FragmentPresenter presenter = MyApplication.fragmentStack.getNextFragment();
+        mainDelegate.setCallBack(presenter);
+        mainDelegate.changePage(page, bundle, resultCode);
     }
 
 }

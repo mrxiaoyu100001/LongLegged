@@ -19,8 +19,8 @@ import com.org.appfragme.databind.CallBack;
 public interface Mediator{
     public void changePage(FragmentPage page);
     public void changePage(FragmentPage page, Bundle bundle);
-    public void changePage(FragmentPage page, int requestCode, CallBack callBack);
-    public void changePage(FragmentPage page, Bundle bundle, int requestCode, CallBack callback);
+    public void changePage(FragmentPage page, int requestCode);
+    public void changePage(FragmentPage page, Bundle bundle, int requestCode);
     public void backChange();
     public void backChange(FragmentPage page);
 }

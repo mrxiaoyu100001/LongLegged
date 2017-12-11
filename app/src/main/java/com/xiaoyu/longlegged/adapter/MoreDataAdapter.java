@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.org.appfragme.utils.XXXLog;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.modle.MoreData;
 import com.xiaoyu.longlegged.utils.Data;
@@ -28,12 +29,19 @@ import java.util.List;
 public class MoreDataAdapter extends RecyclerView.Adapter<MoreDataAdapter.Hodler> {
 
     private List<MoreData> data;
+    private onItemClick onItemClick;
 
     public MoreDataAdapter() {
+        data = new ArrayList<>();
     }
 
     public void refresh(List<MoreData> list) {
         data = list;
+        notifyDataSetChanged();
+    }
+
+    public void setOnItemClick(MoreDataAdapter.onItemClick onItemClick) {
+        this.onItemClick = onItemClick;
     }
 
     @Override
@@ -42,8 +50,14 @@ public class MoreDataAdapter extends RecyclerView.Adapter<MoreDataAdapter.Hodler
     }
 
     @Override
-    public void onBindViewHolder(Hodler holder, int position) {
+    public void onBindViewHolder(Hodler holder, final int position) {
         holder.tv.setText(data.get(position).getValue());
+        holder.tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClick.onItemClick(data.get(position));
+            }
+        });
     }
 
     @Override
@@ -59,5 +73,10 @@ public class MoreDataAdapter extends RecyclerView.Adapter<MoreDataAdapter.Hodler
             super(itemView);
             tv = itemView.findViewById(R.id.lay_tv);
         }
+    }
+
+
+    public interface onItemClick {
+        public void onItemClick(MoreData itemData);
     }
 }

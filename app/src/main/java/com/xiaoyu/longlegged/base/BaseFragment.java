@@ -21,7 +21,7 @@ import com.org.appfragme.view.IDelegate;
 public abstract class BaseFragment<T extends IDelegate> extends FragmentPresenter implements CallBack {
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
+    public void onActivityResult( int resultCode, Bundle data) {
 
     }
 }

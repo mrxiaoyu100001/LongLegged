@@ -28,7 +28,11 @@ import android.widget.Toolbar;
 
 import com.org.appfragme.R;
 import com.org.appfragme.databind.CallBack;
+import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.presenter.ActivityPresenter;
+import com.org.appfragme.presenter.FragmentPresenter;
+import com.org.appfragme.presenter.FragmentStack;
+import com.org.appfragme.utils.ALiBaBa;
 import com.org.appfragme.utils.AnnotateUtil;
 import com.org.appfragme.utils.XXXLog;
 
@@ -48,14 +52,15 @@ import com.org.appfragme.utils.XXXLog;
  * @Resources:
  * @Remark:
  */
-public abstract class AppDelegate implements IDelegate, View.OnClickListener, CallBack {
+public abstract class AppDelegate implements IDelegate, View.OnClickListener {
     protected final SparseArray<View> mViews = new SparseArray<View>();
     protected View rootView;
+    /*当前fragment*/
+    private FragmentPresenter currentFragment;
+    private CallBack callBack;
 
     public abstract int getRootLayoutId();
 
-    /*当前fragment*/
-    private Fragment currentFragment;
 
     @Override
     public void create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -126,13 +131,17 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener, Ca
         return (T) rootView.getContext();
     }
 
+    public DataBindFragment getFragment() {
+        return (DataBindFragment) currentFragment;
+    }
+
     /**
      * 界面跳转
      *
      * @param resView
      * @param mFragment
      */
-    public void enterChangeFragment(int resView, Fragment mFragment) {
+    public void enterChangeFragment(int resView, FragmentPresenter mFragment) {
         if (mFragment.equals(currentFragment)) {
             return;
         }
@@ -156,10 +165,11 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener, Ca
 
     /**
      * 界面回退
+     *
      * @param resView
      * @param mFragment
      */
-    public void outChangeFragment(int resView, Fragment mFragment) {
+    public void outChangeFragment(int resView, FragmentPresenter mFragment) {
         if (mFragment.equals(currentFragment)) {
             return;
         }
@@ -181,8 +191,22 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener, Ca
         transaction.commit();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
+    public CallBack getCallBack() {
+        return callBack;
+    }
+
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
+    }
+
+    public void setResult(int resultCode, Bundle bundle) {
+        if (callBack != null) {
+            callBack.onActivityResult(resultCode, bundle);
+        }
+    }
+
+    public void finish() {
 
     }
+
 }

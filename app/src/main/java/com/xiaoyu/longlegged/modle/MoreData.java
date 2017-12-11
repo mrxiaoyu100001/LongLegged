@@ -1,5 +1,7 @@
 package com.xiaoyu.longlegged.modle;
 
+import java.io.Serializable;
+
 /**
  * @Created: xiaoyu  on 2017.12.07 21:10.
  * @Describe：
@@ -12,7 +14,7 @@ package com.xiaoyu.longlegged.modle;
  * @Remark:
  */
 
-public class MoreData {
+public class MoreData implements Serializable {
 
     private String value;
 

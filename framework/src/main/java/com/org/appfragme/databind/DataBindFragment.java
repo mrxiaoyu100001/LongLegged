@@ -34,7 +34,7 @@ import com.org.appfragme.view.IDelegate;
  * @Remark:
  */
 public abstract class DataBindFragment<T extends IDelegate> extends
-        FragmentPresenter<T> implements CallBack {
+        FragmentPresenter<T> {
 
     protected DataBinder binder;
 
@@ -42,6 +42,8 @@ public abstract class DataBindFragment<T extends IDelegate> extends
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binder = getDataBinder();
+        /*按理说网络家在数据应该有延迟，但是不保证加载数据的时间比初始化时间短。*/
+        initData(getArguments());
     }
 
     public abstract DataBinder getDataBinder();
@@ -52,7 +54,7 @@ public abstract class DataBindFragment<T extends IDelegate> extends
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
+    public void onActivityResult(int resultCode, Bundle data) {
 
     }
 

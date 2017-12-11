@@ -24,14 +24,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.utils.AnnotateUtil;
 import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.IDelegate;
 
 
 /**
- *
- *
  * @param <T> View delegate class type
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
@@ -47,7 +46,7 @@ import com.org.appfragme.view.IDelegate;
  * @Resources:
  * @Remark:
  */
-public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
+public abstract class FragmentPresenter<T extends IDelegate> extends Fragment implements CallBack {
     public T viewDelegate;
 
     public FragmentPresenter() {
@@ -70,7 +69,6 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        initData(getArguments());
         viewDelegate.create(inflater, container, savedInstanceState);
         return viewDelegate.getRootView();
     }
@@ -117,5 +115,6 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     }
 
     protected abstract Class<T> getDelegateClass();
+
     public abstract boolean onBackEvent();
 }

@@ -52,14 +52,14 @@ public class MainDelegate extends AppDelegate implements Mediator {
     }
 
     @Override
-    public void changePage(FragmentPage page, int requestCode, CallBack callBack) {
+    public void changePage(FragmentPage page, int requestCode) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
         enterChangeFragment(R.id.act_fl_content, presenter);
     }
 
     @Override
-    public void changePage(FragmentPage page, Bundle bundle, int requestCode, CallBack callback) {
+    public void changePage(FragmentPage page, Bundle bundle, int requestCode) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         enterChangeFragment(R.id.act_fl_content, MyApplication.fragmentStack.addFragment(cla));
     }

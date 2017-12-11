@@ -42,4 +42,10 @@ public class SearchFragment extends DataBindFragment<SearchDelegate> {
     public boolean onBackEvent() {
         return false;
     }
+
+    @Override
+    public void onActivityResult(int resultCode, Bundle data) {
+        super.onActivityResult(resultCode, data);
+        XXXLog.e("  －－－－－－－－－－－－－－   " + data);
+    }
 }

@@ -1,5 +1,7 @@
 package com.org.appfragme.presenter;
 
+import android.widget.TextView;
+
 import com.org.appfragme.utils.XXXLog;
 
 import java.util.Iterator;
@@ -50,6 +52,10 @@ public class FragmentStack {
             }
         }
         return instance;
+    }
+
+    public static <T extends FragmentPresenter>T getFragment(Class<T> cla) {
+        return null;
     }
 
     /**

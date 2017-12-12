@@ -3,7 +3,6 @@ package com.org.appfragme.databind;
 import android.os.Bundle;
 
 import com.org.appfragme.utils.Constant;
-import com.org.appfragme.utils.XXXLog;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.presenter.FragmentPresenter;
+import com.org.appfragme.utils.ALiBaBa;
+import com.org.appfragme.utils.XXXLog;
 import com.xiaoyu.longlegged.MainActivity;
 import com.xiaoyu.longlegged.MyApplication;
 import com.xiaoyu.longlegged.base.FragmentPage;
@@ -62,9 +64,7 @@ public class AppMethod {
                                     int resultCode) {
         MainActivity activity = (MainActivity) context;
         MainDelegate mainDelegate = activity.getDelegate();
-        FragmentPresenter presenter = MyApplication.fragmentStack.getNextFragment();
-        mainDelegate.setCallBack(presenter);
-        mainDelegate.changePage(page, resultCode);
+        mainDelegate.changePage(page, resultCode, MyApplication.fragmentStack.getBackStackTop());
     }
 
     /**
@@ -77,9 +77,7 @@ public class AppMethod {
                                     Bundle bundle, int resultCode) {
         MainActivity activity = (MainActivity) context;
         MainDelegate mainDelegate = activity.getDelegate();
-        FragmentPresenter presenter = MyApplication.fragmentStack.getNextFragment();
-        mainDelegate.setCallBack(presenter);
-        mainDelegate.changePage(page, bundle, resultCode);
+        mainDelegate.changePage(page, bundle, resultCode, MyApplication.fragmentStack.getBackStackTop());
     }
 
 }

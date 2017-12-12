@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.org.appfragme.databind.CallBack;
+import com.org.appfragme.databind.FragmentSuject;
+import com.org.appfragme.databind.Observer;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.utils.ViewInject;
+import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.AppDelegate;
 import com.xiaoyu.longlegged.MyApplication;
 import com.xiaoyu.longlegged.R;
@@ -24,7 +27,7 @@ import com.xiaoyu.longlegged.base.Mediator;
  * @Remark:
  */
 
-public class MainDelegate extends AppDelegate implements Mediator {
+public class MainDelegate extends AppDelegate implements Mediator, Observer<FragmentPage> {
 
     @Override
     public int getRootLayoutId() {
@@ -40,48 +43,96 @@ public class MainDelegate extends AppDelegate implements Mediator {
     @Override
     public void changePage(FragmentPage page) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
-        enterChangeFragment(R.id.act_fl_content, MyApplication.fragmentStack.addFragment(cla));
+        FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), null);
+        enterChangeFragment(R.id.act_fl_content, presenter);
     }
 
     @Override
     public void changePage(FragmentPage page, Bundle bundle) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), null);
         presenter.setArguments(bundle);
         enterChangeFragment(R.id.act_fl_content, presenter);
     }
 
     @Override
-    public void changePage(FragmentPage page, int requestCode) {
+    public void changePage(FragmentPage page, int requestCode, CallBack callBack) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), callBack);
         enterChangeFragment(R.id.act_fl_content, presenter);
     }
 
     @Override
-    public void changePage(FragmentPage page, Bundle bundle, int requestCode) {
+    public void changePage(FragmentPage page, Bundle bundle, int requestCode, CallBack callBack) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
-        enterChangeFragment(R.id.act_fl_content, MyApplication.fragmentStack.addFragment(cla));
+        FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), callBack);
+        presenter.setArguments(bundle);
+        enterChangeFragment(R.id.act_fl_content, presenter);
     }
 
     @Override
     public void backChange() {
         Class cla = FragmentPage.getPageByValue(FragmentPage.Main.getValue());
         FragmentPresenter currentFragment = MyApplication.fragmentStack.getBackStackTop();
-        if (!currentFragment.onBackEvent()){
-            if (MyApplication.fragmentStack.isTopFragment(cla)){
+        if (!currentFragment.onBackEvent()) {
+            if (MyApplication.fragmentStack.isTopFragment(cla)) {
                 ViewInject.toast(this.getActivity(), "  直接退出了！！！   ");
                 MyApplication.fragmentStack.removeAllFragment();
-                getActivity().finish();
-            }else {
-                outChangeFragment(R.id.act_fl_content, MyApplication.fragmentStack.getNextFragment());
-                MyApplication.fragmentStack.removeTopStack();
+                finish();
+            } else {
+                backOutPage();
             }
         }
     }
 
+    private void backOutPage() {
+        outChangeFragment(R.id.act_fl_content, MyApplication.fragmentStack.getNextFragment());
+        MyApplication.fragmentStack.removeTopStack();
+    }
+
+    private void backOutPage(FragmentPage page) {
+        Class cla = FragmentPage.getPageByValue(page.getValue());
+        FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        outChangeFragment(R.id.act_fl_content, presenter);
+    }
+
+    private void backOutPage(Class cla, Bundle bundle) {
+        FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        presenter.setArguments(bundle);
+        outChangeFragment(R.id.act_fl_content, presenter);
+    }
+
     @Override
     public void backChange(FragmentPage page) {
+
+    }
+
+    @Override
+    public void updatePage() {
+        backOutPage();
+    }
+
+    @Override
+    public void updatePage(FragmentPage data) {
+        backOutPage(data);
+    }
+
+    @Override
+    public void updatePage(Class<?> data, Bundle bundle) {
+        backOutPage(data, bundle);
+    }
+
+    @Override
+    public void updateTitle() {
+
+    }
+
+    @Override
+    public void updateTitle(FragmentPage data) {
 
     }
 }

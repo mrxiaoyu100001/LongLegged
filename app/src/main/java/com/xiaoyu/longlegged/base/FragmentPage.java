@@ -1,8 +1,10 @@
 package com.xiaoyu.longlegged.base;
 
+import com.xiaoyu.longlegged.delegate.OthorDelegate;
 import com.xiaoyu.longlegged.fragment.DetailFragment;
 import com.xiaoyu.longlegged.fragment.MainFragment;
 import com.xiaoyu.longlegged.fragment.MoreDataFragment;
+import com.xiaoyu.longlegged.fragment.OthorFragment;
 import com.xiaoyu.longlegged.fragment.SearchFragment;
 import com.xiaoyu.longlegged.fragment.WelcomeFrament;
 
@@ -22,7 +24,8 @@ public enum FragmentPage {
     Main(2, MainFragment.class),
     Search(3, SearchFragment.class),
     Detail(4, DetailFragment.class),
-    MoreData(5, MoreDataFragment.class);
+    MoreData(5, MoreDataFragment.class),
+    Othor(6, OthorFragment.class);
     private Class<?> clazz;
     private int value;
 

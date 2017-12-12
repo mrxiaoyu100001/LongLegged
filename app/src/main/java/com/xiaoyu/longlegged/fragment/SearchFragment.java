@@ -8,6 +8,7 @@ import com.org.appfragme.utils.Constant;
 import com.org.appfragme.utils.XXXLog;
 import com.xiaoyu.longlegged.dataBinder.SearchDateBinder;
 import com.xiaoyu.longlegged.delegate.SearchDelegate;
+import com.xiaoyu.longlegged.modle.MoreData;
 
 /**
  * @Created: xiaoyu  on 2017.12.05 15:18.
@@ -46,6 +47,6 @@ public class SearchFragment extends DataBindFragment<SearchDelegate> {
     @Override
     public void onActivityResult(int resultCode, Bundle data) {
         super.onActivityResult(resultCode, data);
-        XXXLog.e("  －－－－－－－－－－－－－－   " + data);
+        viewDelegate.setText((MoreData) data.get(Constant.Constant_key));
     }
 }

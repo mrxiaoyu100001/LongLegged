@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.widget.Toolbar;
 import android.view.Menu;
 
+import com.org.appfragme.databind.Observer;
 import com.org.appfragme.utils.AnnotateUtil;
 import com.org.appfragme.view.IDelegate;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
@@ -77,7 +78,8 @@ public abstract class ActivityPresenter<T extends IDelegate> extends RxFragmentA
         initata();
     }
 
-    protected void initata(){}
+    protected void initata() {
+    }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {

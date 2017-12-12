@@ -2,6 +2,7 @@ package com.org.appfragme.presenter;
 
 import android.widget.TextView;
 
+import com.org.appfragme.databind.FragmentSuject;
 import com.org.appfragme.utils.XXXLog;
 
 import java.util.Iterator;
@@ -54,7 +55,7 @@ public class FragmentStack {
         return instance;
     }
 
-    public static <T extends FragmentPresenter>T getFragment(Class<T> cla) {
+    public static <T extends FragmentPresenter> T getFragment(Class<T> cla) {
         return null;
     }
 
@@ -313,9 +314,6 @@ public class FragmentStack {
         if (cacheStack != null) {
             FragmentPresenter top = getBackStackTop();
             FragmentPresenter current = getCacheStock(cla);
-            XXXLog.e(Tag + top);
-            XXXLog.e(Tag + current);
-            XXXLog.e(Tag + (top.hashCode() == current.hashCode()));
             return top.hashCode() == current.hashCode();
         }
         return false;
@@ -328,7 +326,9 @@ public class FragmentStack {
      */
     public FragmentPresenter getNextFragment() {
         if (cacheStack != null) {
-            return getCacheStock(backStack.get(getStackNum() - 2));
+            if (getStackNum() >= 2) {
+                return getCacheStock(backStack.get(getStackNum() - 2));
+            }
         }
         return null;
     }

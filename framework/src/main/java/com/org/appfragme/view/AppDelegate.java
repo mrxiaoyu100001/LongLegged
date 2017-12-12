@@ -17,7 +17,6 @@ package com.org.appfragme.view;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -29,12 +28,9 @@ import android.widget.Toolbar;
 import com.org.appfragme.R;
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.DataBindFragment;
+import com.org.appfragme.databind.Subject;
 import com.org.appfragme.presenter.ActivityPresenter;
 import com.org.appfragme.presenter.FragmentPresenter;
-import com.org.appfragme.presenter.FragmentStack;
-import com.org.appfragme.utils.ALiBaBa;
-import com.org.appfragme.utils.AnnotateUtil;
-import com.org.appfragme.utils.XXXLog;
 
 
 /**
@@ -58,6 +54,7 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
     /*当前fragment*/
     private FragmentPresenter currentFragment;
     private CallBack callBack;
+    private Subject subject;
 
     public abstract int getRootLayoutId();
 
@@ -142,7 +139,7 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
      * @param mFragment
      */
     public void enterChangeFragment(int resView, FragmentPresenter mFragment) {
-        if (mFragment.equals(currentFragment)) {
+        if (mFragment == null && mFragment.equals(currentFragment)) {
             return;
         }
         FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
@@ -170,7 +167,7 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
      * @param mFragment
      */
     public void outChangeFragment(int resView, FragmentPresenter mFragment) {
-        if (mFragment.equals(currentFragment)) {
+        if (mFragment == null && mFragment.equals(currentFragment)) {
             return;
         }
         FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
@@ -191,12 +188,13 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
         transaction.commit();
     }
 
-    public CallBack getCallBack() {
-        return callBack;
-    }
-
     public void setCallBack(CallBack callBack) {
         this.callBack = callBack;
+    }
+
+    public void setCallBack(Subject context, CallBack callBack) {
+        this.callBack = callBack;
+        this.subject = context;
     }
 
     public void setResult(int resultCode, Bundle bundle) {
@@ -206,7 +204,28 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
     }
 
     public void finish() {
-
+        getActivity().finish();
     }
 
+    public void finishResult() {
+        if (subject != null) {
+            subject.notifyChange();
+        }
+    }
+
+    /**
+     * 这两个方法冗余了，但是先留着吧，后期再去做维护。
+     * @param cla
+     */
+    public void finishResult(Class<?> cla) {
+        if (subject != null) {
+            subject.notifyChange(cla);
+        }
+    }
+
+    public void finishResult(Class<?> cla, Bundle bundle) {
+        if (subject != null) {
+            subject.notifyChage(cla, bundle);
+        }
+    }
 }

@@ -25,8 +25,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.org.appfragme.databind.CallBack;
+import com.org.appfragme.databind.FragmentSuject;
+import com.org.appfragme.databind.Subject;
 import com.org.appfragme.utils.AnnotateUtil;
 import com.org.appfragme.utils.XXXLog;
+import com.org.appfragme.view.AppDelegate;
 import com.org.appfragme.view.IDelegate;
 
 
@@ -46,8 +49,10 @@ import com.org.appfragme.view.IDelegate;
  * @Resources:
  * @Remark:
  */
-public abstract class FragmentPresenter<T extends IDelegate> extends Fragment implements CallBack {
+public abstract class FragmentPresenter<T extends AppDelegate> extends Fragment implements CallBack {
     public T viewDelegate;
+    private CallBack callBack;
+    private Subject suject;
 
     public FragmentPresenter() {
     }
@@ -57,6 +62,7 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment im
         super.onCreate(savedInstanceState);
         try {
             viewDelegate = getDelegateClass().newInstance();
+            viewDelegate.setCallBack(suject, callBack);
         } catch (java.lang.InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -100,6 +106,7 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment im
         if (viewDelegate == null) {
             try {
                 viewDelegate = getDelegateClass().newInstance();
+                viewDelegate.setCallBack(suject, callBack);
             } catch (java.lang.InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -117,4 +124,13 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment im
     protected abstract Class<T> getDelegateClass();
 
     public abstract boolean onBackEvent();
+
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
+    }
+
+    public void setCallBack(Subject suject, CallBack callBack) {
+        this.suject = suject;
+        this.callBack = callBack;
+    }
 }

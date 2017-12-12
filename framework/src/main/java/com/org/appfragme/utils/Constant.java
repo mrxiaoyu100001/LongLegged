@@ -9,6 +9,8 @@ package com.org.appfragme.utils;
  * @Remark:
  */
 public class Constant {
+    //应用最大界面数
+    public static final int stackNum = 300;
     /*整数型*/
     public static final int Constant_one = 0x1;
     public static final int Constant_two = 0x2;

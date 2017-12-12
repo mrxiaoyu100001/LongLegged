@@ -11,6 +11,7 @@ import com.org.appfragme.view.AppDelegate;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.common.AppMethod;
+import com.xiaoyu.longlegged.modle.MoreData;
 
 import static android.R.attr.id;
 
@@ -38,7 +39,7 @@ public class SearchDelegate extends AppDelegate implements View.OnClickListener 
     @Override
     public void initWidget(View contentView) {
         super.initWidget(contentView);
-        tv_sub = bindView(R.id.frag_tv_sub);
+        tv_sub = bindView(R.id.frag_tv_sub3);
         setOnClickListener(this, R.id.frag_tv_sub);
         setOnClickListener(this, R.id.frag_tv_sub2);
     }
@@ -51,5 +52,9 @@ public class SearchDelegate extends AppDelegate implements View.OnClickListener 
         } else if (view.getId() == R.id.frag_tv_sub2) {
             AppMethod.postShowWith(this.getActivity(), FragmentPage.MoreData, Constant.Constant_one);
         }
+    }
+
+    public void setText(MoreData data) {
+        tv_sub.setText(data.getValue());
     }
 }

@@ -11,8 +11,10 @@ import com.org.appfragme.utils.DensityUtils;
 import com.org.appfragme.utils.RecyclerViewItemDecoration;
 import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.AppDelegate;
+import com.xiaoyu.longlegged.MyApplication;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.adapter.MoreDataAdapter;
+import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.modle.MoreData;
 import com.xiaoyu.longlegged.modle.MoreDataList;
 
@@ -56,8 +58,18 @@ public class MoreDataDelegate extends AppDelegate {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constant.Constant_key, itemData);
                 setResult(Constant.Constant_one, bundle);
+                finishResult();
             }
         });
+        setOnClickListener(this, R.id.frag_tv_content);
+    }
+
+    @Override
+    public void widgetClick(View view) {
+        super.widgetClick(view);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.Constant_key, "1234567890123456789");
+        finishResult(FragmentPage.Othor.getClazz(), bundle);
     }
 
     /**

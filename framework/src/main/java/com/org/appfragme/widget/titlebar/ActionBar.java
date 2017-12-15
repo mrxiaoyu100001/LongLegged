@@ -1,5 +1,6 @@
 package com.org.appfragme.widget;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -18,13 +19,15 @@ import android.widget.RelativeLayout;
 public class ActionBar {
 
     private static ActionBar instance;
+    private Context context;
 
-    private ActionBar() {
+    private ActionBar(){}
+    private ActionBar(Context context) {
+        this.context = context;
     }
 
     /**
-     * 初始化标题辅助类
-     *
+     * 初始化
      * @return
      */
     public static ActionBar getInstance() {
@@ -38,9 +41,34 @@ public class ActionBar {
         return instance;
     }
 
+    /**
+     * 初始化标题辅助类
+     *
+     * @return
+     */
+    public static ActionBar getInstance(Context context) {
+        if (instance == null) {
+            synchronized (ActionBar.class) {
+                if (instance == null) {
+                    instance = new ActionBar(context);
+                }
+            }
+        }
+        return instance;
+    }
+
+    /**
+     * 清除缓存
+     * @return
+     */
+    public boolean clearActionBar() {
+        instance = null;
+        return true;
+    }
+
+    private boolean showTitleBar;                       // 是否显示标题栏
     private View viewStatusBarFill;                     // 状态栏填充视图
     private View viewBottomLine;                        // 分隔线视图
-    private RelativeLayout rlMain;                      // 主视图
     private boolean fillStatusBar;                      // 是否撑起状态栏, true时,标题栏浸入状态栏
     private int titleBarColor;                          // 标题栏背景颜色
     private int titleBarHeight;                         // 标题栏高度
@@ -56,6 +84,7 @@ public class ActionBar {
     private float leftDrawablePadding;                  // 左边TextView drawablePadding
     private int leftImageResource;                      // 左边图片资源
     private int leftCustomViewRes;                      // 左边自定义视图布局资源
+    private int rightType;                               // 右边视图类型
     private String rightText;                           // 右边TextView文字
     private int rightTextColor;                         // 右边TextView颜色
     private float rightTextSize;                        // 右边TextView文字大小
@@ -72,6 +101,10 @@ public class ActionBar {
     private int centerSearchBgResource;                 // 搜索框背景图片
     private int centerSearchRightType;                  // 搜索框右边按钮类型  0: voice 1: delete
     private int centerCustomViewRes;                    // 中间自定义布局资源
+
+    public boolean isShowTitleBar() {
+        return showTitleBar;
+    }
 
     public int getCenterCustomViewRes() {
         return centerCustomViewRes;
@@ -197,16 +230,26 @@ public class ActionBar {
         return fillStatusBar;
     }
 
-    public RelativeLayout getRlMain() {
-        return rlMain;
-    }
-
     public View getViewBottomLine() {
         return viewBottomLine;
     }
 
     public View getViewStatusBarFill() {
         return viewStatusBarFill;
+    }
+
+    public int getRightType() {
+        return rightType;
+    }
+
+    public ActionBar setRightType(int rightType) {
+        this.rightType = rightType;
+        return this;
+    }
+
+    public ActionBar setShowTitleBar(boolean showTitleBar) {
+        this.showTitleBar = showTitleBar;
+        return this;
     }
 
     public ActionBar setViewStatusBarFill(View viewStatusBarFill) {
@@ -216,11 +259,6 @@ public class ActionBar {
 
     public ActionBar setViewBottomLine(View viewBottomLine) {
         this.viewBottomLine = viewBottomLine;
-        return this;
-    }
-
-    public ActionBar setRlMain(RelativeLayout rlMain) {
-        this.rlMain = rlMain;
         return this;
     }
 
@@ -334,6 +372,11 @@ public class ActionBar {
         return this;
     }
 
+    public ActionBar setCenterText(int centerText) {
+        this.centerText = context.getResources().getString(centerText);
+        return this;
+    }
+
     public ActionBar setCenterTextColor(int centerTextColor) {
         this.centerTextColor = centerTextColor;
         return this;
@@ -377,5 +420,46 @@ public class ActionBar {
     public ActionBar setCenterCustomViewRes(int centerCustomViewRes) {
         this.centerCustomViewRes = centerCustomViewRes;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ActionBar{" +
+                "showTitleBar=" + showTitleBar +
+                ", viewStatusBarFill=" + viewStatusBarFill +
+                ", viewBottomLine=" + viewBottomLine +
+                ", fillStatusBar=" + fillStatusBar +
+                ", titleBarColor=" + titleBarColor +
+                ", titleBarHeight=" + titleBarHeight +
+                ", statusBarColor=" + statusBarColor +
+                ", showBottomLine=" + showBottomLine +
+                ", bottomLineColor=" + bottomLineColor +
+                ", bottomElevation=" + bottomElevation +
+                ", leftType=" + leftType +
+                ", leftText='" + leftText + '\'' +
+                ", leftTextColor=" + leftTextColor +
+                ", leftTextSize=" + leftTextSize +
+                ", leftDrawable=" + leftDrawable +
+                ", leftDrawablePadding=" + leftDrawablePadding +
+                ", leftImageResource=" + leftImageResource +
+                ", leftCustomViewRes=" + leftCustomViewRes +
+                ", rightType=" + rightType +
+                ", rightText='" + rightText + '\'' +
+                ", rightTextColor=" + rightTextColor +
+                ", rightTextSize=" + rightTextSize +
+                ", rightImageResource=" + rightImageResource +
+                ", rightCustomViewRes=" + rightCustomViewRes +
+                ", centerType=" + centerType +
+                ", centerText='" + centerText + '\'' +
+                ", centerTextColor=" + centerTextColor +
+                ", centerTextSize=" + centerTextSize +
+                ", centerSubText='" + centerSubText + '\'' +
+                ", centerSubTextColor=" + centerSubTextColor +
+                ", centerSubTextSize=" + centerSubTextSize +
+                ", centerSearchEdiable=" + centerSearchEdiable +
+                ", centerSearchBgResource=" + centerSearchBgResource +
+                ", centerSearchRightType=" + centerSearchRightType +
+                ", centerCustomViewRes=" + centerCustomViewRes +
+                '}';
     }
 }

@@ -186,6 +186,6 @@ public abstract class ActivityDelegate implements IDelegate, View.OnClickListene
     }
 
     public ActionBar getActionBar() {
-        return ActionBar.getInstance();
+        return ActionBar.getInstance(this.getActivity());
     }
 }

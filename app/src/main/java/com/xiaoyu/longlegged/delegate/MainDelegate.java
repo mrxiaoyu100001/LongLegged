@@ -10,6 +10,7 @@ import com.org.appfragme.databind.Observer;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.utils.ActionBarHelper;
 import com.org.appfragme.utils.ViewInject;
+import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
@@ -18,6 +19,7 @@ import com.xiaoyu.longlegged.MyApplication;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.base.Mediator;
+import com.xiaoyu.longlegged.common.AppMethod;
 
 /**
  * @Created: xiaoyu  on 2017.12.01 16:57.
@@ -47,11 +49,9 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
     @Override
     public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
         super.setTitleBar(titleBar);
-        FragmentPresenter presenter = MyApplication.fragmentStack.getBackStackTop();
-        FragmentDelegate delegate = presenter.viewDelegate;
-        delegate.setTitleBar(titleBar);
         ActionBarHelper
-                .getInstance((CommonTitleBar) get(R.id.frag_ct_title), titleBar)
+                .getInstance(this.getActivity(), (CommonTitleBar) get(R.id.frag_ct_title), titleBar)
+                .builderActionBar()
                 .builder();
     }
 
@@ -67,7 +67,6 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
     public void changePage(FragmentPage page, Bundle bundle) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
-        FragmentDelegate delegate = presenter.viewDelegate;
         presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), null);
         presenter.setArguments(bundle);
         enterChangeFragment(R.id.act_fl_content, presenter);
@@ -77,7 +76,6 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
     public void changePage(FragmentPage page, int requestCode, CallBack callBack) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
-        FragmentDelegate delegate = presenter.viewDelegate;
         presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), callBack);
         enterChangeFragment(R.id.act_fl_content, presenter);
     }
@@ -86,7 +84,6 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
     public void changePage(FragmentPage page, Bundle bundle, int requestCode, CallBack callBack) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
-        FragmentDelegate delegate = presenter.viewDelegate;
         presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), callBack);
         presenter.setArguments(bundle);
         enterChangeFragment(R.id.act_fl_content, presenter);
@@ -94,16 +91,18 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
 
     @Override
     public void backChange() {
-        Class cla = FragmentPage.getPageByValue(FragmentPage.Main.getValue());
-        FragmentPresenter currentFragment = MyApplication.fragmentStack.getBackStackTop();
-        if (!currentFragment.onBackEvent()) {
-            if (MyApplication.fragmentStack.isTopFragment(cla)) {
-                ViewInject.toast(this.getActivity(), "  直接退出了！！！   ");
-                MyApplication.fragmentStack.removeAllFragment();
-                finish();
-            } else {
-                backOutPage();
+        try {
+            Class cla = FragmentPage.getPageByValue(FragmentPage.Main.getValue());
+            FragmentPresenter currentFragment = MyApplication.fragmentStack.getBackStackTop();
+            if (!currentFragment.onBackEvent()) {
+                if (MyApplication.fragmentStack.isTopFragment(cla)) {
+                    AppMethod.AppOver(this.getActivity());
+                } else {
+                    backOutPage();
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

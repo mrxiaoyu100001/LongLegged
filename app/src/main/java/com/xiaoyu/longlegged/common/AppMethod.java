@@ -1,17 +1,26 @@
 package com.xiaoyu.longlegged.common;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.presenter.FragmentPresenter;
+import com.org.appfragme.presenter.FragmentStack;
 import com.org.appfragme.utils.ALiBaBa;
+import com.org.appfragme.utils.ActionBarHelper;
+import com.org.appfragme.utils.ViewInject;
 import com.org.appfragme.utils.XXXLog;
+import com.org.appfragme.widget.ActionBar;
 import com.xiaoyu.longlegged.MainActivity;
 import com.xiaoyu.longlegged.MyApplication;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.delegate.MainDelegate;
+
+import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
  * @Created: xiaoyu  on 2017.12.04 16:38.
@@ -26,6 +35,8 @@ import com.xiaoyu.longlegged.delegate.MainDelegate;
  */
 
 public class AppMethod {
+
+    private static boolean isExist;
 
     private AppMethod() {
         throw new Error("MethodNotInitException");
@@ -78,6 +89,44 @@ public class AppMethod {
         MainActivity activity = (MainActivity) context;
         MainDelegate mainDelegate = activity.getDelegate();
         mainDelegate.changePage(page, bundle, resultCode, MyApplication.fragmentStack.getBackStackTop());
+    }
+
+    /**
+     * 退出app
+     * @param activity
+     * @throws Exception
+     */
+    public static void AppOver(Activity activity) throws Exception {
+        if (!isExist) {
+            ViewInject.longToast("再按一次退出");
+            isExist = true;
+            Handler h = new Handler();
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isExist = false;
+                }
+            }, 3000);
+        } else {
+            clearApp();
+            if (Integer.parseInt(android.os.Build.VERSION.SDK) >= android.os.Build.VERSION_CODES.ECLAIR_MR1) {
+                Intent mainActivity = new Intent(Intent.ACTION_MAIN);
+                mainActivity.addCategory(Intent.CATEGORY_HOME);
+                mainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(mainActivity);
+                System.exit(0);//退出程序
+            } else {
+                ActivityManager activityMgr = (ActivityManager) activity.getSystemService(ACTIVITY_SERVICE);
+                activityMgr.restartPackage(activity.getPackageName());
+            }
+        }
+    }
+
+    /*清除缓存数据*/
+    private static void clearApp() {
+        MyApplication.fragmentStack.removeAllFragment();
+        ActionBarHelper.getInstance().clearHelper();
+        ActionBar.getInstance().clearActionBar();
     }
 
 }

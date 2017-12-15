@@ -31,7 +31,6 @@ public class MainFragment extends DataBindFragment<MainFragDelegate> {
 
     @Override
     public boolean onBackEvent() {
-        ViewInject.longToast("     onBackEvent      !!!");
-        return true;
+        return false;
     }
 }

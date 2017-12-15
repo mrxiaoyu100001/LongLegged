@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.org.appfragme.model.IModel;
+import com.org.appfragme.presenter.ActivityPresenter;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.FragmentDelegate;
@@ -47,11 +48,26 @@ public abstract class DataBindFragment<T extends FragmentDelegate> extends
         initData(getArguments());
     }
 
+    /*初始化标题*/
+    public void refreshTitleBar(ActivityPresenter activityPresenter) {
+        if (activityPresenter != null) {
+            ActivityDelegate activityDelegate = activityPresenter.getViewDelegate();
+            viewDelegate.setTitleBar(activityDelegate.getActionBar());
+            activityDelegate.setTitleBar(activityDelegate.getActionBar());
+        }
+    }
+
     public abstract DataBinder getDataBinder();
 
     public <D extends IModel> void notifyModelChanged(D data) {
         if (binder != null)
             binder.viewBindModel(viewDelegate, data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshTitleBar((ActivityPresenter) getActivity());
     }
 
     @Override

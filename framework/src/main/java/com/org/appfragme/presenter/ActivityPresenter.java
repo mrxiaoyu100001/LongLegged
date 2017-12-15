@@ -42,7 +42,6 @@ import com.trello.rxlifecycle.components.support.RxFragmentActivity;
  */
 public abstract class ActivityPresenter<T extends ActivityDelegate> extends RxFragmentActivity {
     protected T viewDelegate;
-    public ActivityPresenter presenter;
 
     public ActivityPresenter() {
         try {
@@ -57,7 +56,6 @@ public abstract class ActivityPresenter<T extends ActivityDelegate> extends RxFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = this;
         ActivityStack.create().addActivity(this);
         viewDelegate.create(getLayoutInflater(), null, savedInstanceState);
         setContentView(viewDelegate.getRootView());
@@ -67,11 +65,6 @@ public abstract class ActivityPresenter<T extends ActivityDelegate> extends RxFr
     }
 
     protected void bindEvenListener() {
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     protected void initata() {
@@ -103,6 +96,10 @@ public abstract class ActivityPresenter<T extends ActivityDelegate> extends RxFr
     protected void onDestroy() {
         super.onDestroy();
         viewDelegate = null;
+    }
+
+    public T getViewDelegate() {
+        return viewDelegate;
     }
 
     protected abstract Class<T> getDelegateClass();

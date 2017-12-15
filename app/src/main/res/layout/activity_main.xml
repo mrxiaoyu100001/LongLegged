@@ -15,7 +15,7 @@
         titlebar:centerType="textView"
         titlebar:fillStatusBar="true"
         titlebar:leftType="imageButton"
-        titlebar:leftImageResource="@mipmap/main_left"
+        titlebar:leftImageResource="@mipmap/icon_back_white"
         titlebar:rightImageResource="@mipmap/add_03"
         titlebar:rightType="textView"
         titlebar:titleBarHeight="44dp" />

@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.org.appfragme.R;
 import com.org.appfragme.utils.AppUtils;
 import com.org.appfragme.utils.DensityUtils;
+import com.org.appfragme.utils.XXXLog;
 
 /**
  * 通用标题栏
@@ -85,6 +86,7 @@ import com.org.appfragme.utils.DensityUtils;
  * </declare-styleable>
  * <p/>
  * Created by wuhenzhizao on 16/1/12.
+ *
  * @modify：xiaoyu
  */
 @SuppressWarnings("ResourceType")
@@ -153,24 +155,26 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
     private OnTitleBarListener listener;
     private OnTitleBarDoubleClickListener doubleClickListener;
 
-    private static final int TYPE_LEFT_NONE = 0;
-    private static final int TYPE_LEFT_TEXTVIEW = 1;
-    private static final int TYPE_LEFT_IMAGEBUTTON = 2;
-    private static final int TYPE_LEFT_CUSTOM_VIEW = 3;
-    private static final int TYPE_RIGHT_NONE = 0;
-    private static final int TYPE_RIGHT_TEXTVIEW = 1;
-    private static final int TYPE_RIGHT_IMAGEBUTTON = 2;
-    private static final int TYPE_RIGHT_CUSTOM_VIEW = 3;
-    private static final int TYPE_CENTER_NONE = 0;
-    private static final int TYPE_CENTER_TEXTVIEW = 1;
-    private static final int TYPE_CENTER_SEARCHVIEW = 2;
-    private static final int TYPE_CENTER_CUSTOM_VIEW = 3;
+    public static final int TYPE_LEFT_NONE = 0;
+    public static final int TYPE_LEFT_TEXTVIEW = 1;
+    public static final int TYPE_LEFT_IMAGEBUTTON = 2;
+    public static final int TYPE_LEFT_CUSTOM_VIEW = 3;
+    public static final int TYPE_RIGHT_NONE = 0;
+    public static final int TYPE_RIGHT_TEXTVIEW = 1;
+    public static final int TYPE_RIGHT_IMAGEBUTTON = 2;
+    public static final int TYPE_RIGHT_CUSTOM_VIEW = 3;
+    public static final int TYPE_CENTER_NONE = 0;
+    public static final int TYPE_CENTER_TEXTVIEW = 1;
+    public static final int TYPE_CENTER_SEARCHVIEW = 2;
+    public static final int TYPE_CENTER_CUSTOM_VIEW = 3;
 
-    private static final int TYPE_CENTER_SEARCH_RIGHT_VOICE = 0;
-    private static final int TYPE_CENTER_SEARCH_RIGHT_DELETE = 1;
+    public static final int TYPE_CENTER_SEARCH_RIGHT_VOICE = 0;
+    public static final int TYPE_CENTER_SEARCH_RIGHT_DELETE = 1;
+    private Context context;
 
     public CommonTitleBar(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         loadAttributes(context, attrs);
         initGlobalViews(context);
         initMainViews(context);
@@ -238,8 +242,8 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         array.recycle();
     }
 
-    private final int MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT;
-    private final int WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT;
+    public final int MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT;
+    public final int WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT;
 
     /**
      * 初始化全局视图
@@ -682,6 +686,64 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         }
     }
 
+    public boolean isFillStatusBar() {
+        return fillStatusBar;
+    }
+
+    public CommonTitleBar setFillStatusBar(boolean fillStatusBar) {
+        this.fillStatusBar = fillStatusBar;
+        return this;
+    }
+
+    public int getTitleBarColor() {
+        return titleBarColor;
+    }
+
+    public CommonTitleBar setTitleBarColor(int titleBarColor) {
+        this.titleBarColor = titleBarColor;
+        return this;
+    }
+
+    public int getTitleBarHeight() {
+        return titleBarHeight;
+    }
+
+    public CommonTitleBar setTitleBarHeight(int titleBarHeight) {
+        this.titleBarHeight = titleBarHeight;
+        return this;
+    }
+
+    public int getStatusBarColor() {
+        return statusBarColor;
+    }
+
+    public boolean isShowBottomLine() {
+        return showBottomLine;
+    }
+
+    public CommonTitleBar setShowBottomLine(boolean showBottomLine) {
+        this.showBottomLine = showBottomLine;
+        return this;
+    }
+
+    public int getBottomLineColor() {
+        return bottomLineColor;
+    }
+
+    public CommonTitleBar setBottomLineColor(int bottomLineColor) {
+        this.bottomLineColor = bottomLineColor;
+        return this;
+    }
+
+    public float getBottomElevation() {
+        return bottomElevation;
+    }
+
+    public CommonTitleBar setBottomElevation(float bottomElevation) {
+        this.bottomElevation = bottomElevation;
+        return this;
+    }
+
     /**
      * 设置背景颜色
      *
@@ -708,10 +770,11 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置背景图片
+     *
      * @param resId
      */
-    public CommonTitleBar setStatusBarPic(int resId){
-        if(viewStatusBarFill != null){
+    public CommonTitleBar setStatusBarPic(int resId) {
+        if (viewStatusBarFill != null) {
             viewStatusBarFill.setBackgroundResource(resId);
         }
         return this;
@@ -739,12 +802,76 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
     }
 
     /**
+     * 设置横线颜色
+     *
+     * @param color
+     * @return
+     */
+    public CommonTitleBar setButtomLineColor(int color) {
+        this.bottomLineColor = color;
+        return this;
+    }
+
+    /**
+     * @param height
+     * @return
+     */
+    public CommonTitleBar setButtomLineHeight(int height) {
+        this.titleBarHeight = height;
+        return this;
+    }
+
+    /**
+     * 设置左边按钮样式
+     *
+     * @param leftType
+     * @return
+     */
+    public CommonTitleBar setLeftType(int leftType) {
+        this.leftType = leftType;
+        return this;
+    }
+
+    /**
      * 获取标题栏左边TextView，对应leftType = textView
      *
      * @return
      */
     public TextView getLeftTextView() {
         return tvLeft;
+    }
+
+    /**
+     * 设置左边文字
+     *
+     * @param leftText
+     * @return
+     */
+    public CommonTitleBar setLeftText(String leftText) {
+        this.leftText = leftText;
+        return this;
+    }
+
+    /**
+     * 设置昨天按钮文字颜色
+     *
+     * @param leftTextColor
+     * @return
+     */
+    public CommonTitleBar setLeftTextColor(int leftTextColor) {
+        this.leftTextColor = leftTextColor;
+        return this;
+    }
+
+    /**
+     * 设置左边文字大小
+     *
+     * @param leftTextSize
+     * @return
+     */
+    public CommonTitleBar setLeftTextSize(float leftTextSize) {
+        this.leftTextSize = leftTextSize;
+        return this;
     }
 
     /**
@@ -757,12 +884,115 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
     }
 
     /**
+     * 设置左侧图片
+     * @param leftImageResource
+     * @return
+     */
+    public CommonTitleBar setLeftImageResource(int leftImageResource) {
+        this.leftImageResource = leftImageResource;
+        return this;
+    }
+
+    /**
+     * 设置左侧图片drawable资源
+     * @param leftDrawable
+     * @return
+     */
+    public CommonTitleBar setLeftDrawable(int leftDrawable) {
+        this.leftDrawable = leftDrawable;
+        return this;
+    }
+
+    /**
+     * 设置左侧按钮内边距
+     * @param leftDrawablePadding
+     * @return
+     */
+    public CommonTitleBar setLeftDrawablePadding(float leftDrawablePadding) {
+        this.leftDrawablePadding = leftDrawablePadding;
+        return this;
+    }
+
+    /**
+     * 设置左侧自定义布局
+     * @param leftCustomViewRes
+     * @return
+     */
+    public CommonTitleBar setLeftCustomViewRes(int leftCustomViewRes) {
+        this.leftCustomViewRes = leftCustomViewRes;
+        return this;
+    }
+
+    /**
+     * 设置右侧显示类型
+     * @param rightType
+     * @return
+     */
+    public CommonTitleBar setRightType(int rightType) {
+        this.rightType = rightType;
+        return this;
+    }
+    /**
      * 获取标题栏右边TextView，对应rightType = textView
      *
      * @return
      */
     public TextView getRightTextView() {
         return tvRight;
+    }
+
+
+    /**
+     * 设置左边文字
+     *
+     * @param rightText
+     * @return
+     */
+    public CommonTitleBar setRightText(String rightText) {
+        this.rightText = rightText;
+        return this;
+    }
+
+    /**
+     * 设置昨天按钮文字颜色
+     *
+     * @param rightTextColor
+     * @return
+     */
+    public CommonTitleBar setRightTextColor(int rightTextColor) {
+        this.rightTextColor = rightTextColor;
+        return this;
+    }
+
+    /**
+     * 设置左边文字大小
+     *
+     * @param rightTextSize
+     * @return
+     */
+    public CommonTitleBar setRightTextSize(int rightTextSize) {
+        this.rightTextSize = rightTextSize;
+        return this;
+    }
+    /**
+     * 设置左侧图片
+     * @param rightImageResource
+     * @return
+     */
+    public CommonTitleBar setRightImageResource(int rightImageResource) {
+        this.rightImageResource = rightImageResource;
+        return this;
+    }
+
+
+    /**
+     * 设置左侧自定义布局
+     * @param rightCustomViewRes
+     * @return
+     */
+    public CommonTitleBar setRightCustomViewRes(int rightCustomViewRes) {
+        this.rightCustomViewRes = rightCustomViewRes;
+        return this;
     }
 
     /**
@@ -779,6 +1009,16 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
     }
 
     /**
+     * 设置中间显示类型
+     * @param centerType
+     * @return
+     */
+    public CommonTitleBar setCenterType(int centerType) {
+        this.centerType = centerType;
+        return this;
+    }
+
+    /**
      * 获取标题栏中间TextView，对应centerType = textView
      *
      * @return
@@ -787,8 +1027,75 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         return tvCenter;
     }
 
+    /**
+     * 设置中间文字
+     * @param centerText
+     * @return
+     */
+    public CommonTitleBar setCenterText(String centerText) {
+        this.centerText = centerText;
+        XXXLog.e("幼稚吗 ？   " + centerText);
+        XXXLog.e("幼稚吗 ？ ----------------  " + this.centerText);
+        return this;
+    }
+
+    /**
+     * 设置中间文字颜色
+     * @param centerTextColor
+     * @return
+     */
+    public CommonTitleBar setCenterTextColor(int centerTextColor) {
+        this.centerTextColor = centerTextColor;
+        return this;
+    }
+
+    /**
+     * 设置中间文字大小
+     * @param centerTextSize
+     * @return
+     */
+    public CommonTitleBar setCenterTextSize(float centerTextSize) {
+        this.centerTextSize = centerTextSize;
+        return this;
+    }
+
     public TextView getCenterSubTextView() {
         return tvCenterSub;
+    }
+
+    public CommonTitleBar setCenterSubText(String centerSubText) {
+        this.centerSubText = centerSubText;
+        return this;
+    }
+
+    public CommonTitleBar setCenterSubTextColor(int centerSubTextColor) {
+        this.centerSubTextColor = centerSubTextColor;
+        return this;
+    }
+
+    public CommonTitleBar setCenterSubTextSize(float centerSubTextSize) {
+        this.centerSubTextSize = centerSubTextSize;
+        return this;
+    }
+
+    public CommonTitleBar setCenterSearchEdiable(boolean centerSearchEdiable) {
+        this.centerSearchEdiable = centerSearchEdiable;
+        return this;
+    }
+
+    public CommonTitleBar setCenterSearchBgResource(int centerSearchBgResource) {
+        this.centerSearchBgResource = centerSearchBgResource;
+        return this;
+    }
+
+    public CommonTitleBar setCenterSearchRightType(int centerSearchRightType) {
+        this.centerSearchRightType = centerSearchRightType;
+        return this;
+    }
+
+    public CommonTitleBar setCenterCustomViewRes(int centerCustomViewRes) {
+        this.centerCustomViewRes = centerCustomViewRes;
+        return this;
     }
 
     /**
@@ -965,8 +1272,6 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
     /**
      * 设置双击监听
      */
-
-
     public static final int ACTION_LEFT_TEXT = 1;        // 左边TextView被点击
     public static final int ACTION_LEFT_BUTTON = 2;      // 左边ImageBtn被点击
     public static final int ACTION_RIGHT_TEXT = 3;       // 右边TextView被点击
@@ -994,5 +1299,14 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
      */
     public interface OnTitleBarDoubleClickListener {
         void onClicked(View v);
+    }
+
+    /**
+     * 重新初始化组件
+     * @return
+     */
+    public CommonTitleBar builder() {
+        initMainViews(context);
+        return this;
     }
 }

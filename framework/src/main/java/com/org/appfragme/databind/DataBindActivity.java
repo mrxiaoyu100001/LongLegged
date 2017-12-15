@@ -41,12 +41,6 @@ public abstract class DataBindActivity<T extends ActivityDelegate> extends Activ
         binder = getDataBinder();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        viewDelegate.setTitleBar(viewDelegate.getActionBar());
-    }
-
     public abstract DataBinder getDataBinder();
 
     public <D extends IModel> void notifyModelChanged(D data) {

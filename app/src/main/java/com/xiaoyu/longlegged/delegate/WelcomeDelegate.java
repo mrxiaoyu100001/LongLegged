@@ -1,9 +1,13 @@
 package com.xiaoyu.longlegged.delegate;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
+import com.alibaba.fastjson.JSON;
+import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.widget.ActionBar;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.common.AppMethod;
@@ -41,5 +45,12 @@ public class WelcomeDelegate extends FragmentDelegate {
             }
         };
         timer.schedule(timerTask, 2000);
+    }
+
+    @Override
+    public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
+        super.setTitleBar(titleBar);
+        titleBar.setShowTitleBar(false);
+        XXXLog.e(" welcome  走了吗  ？  " + JSON.toJSONString(titleBar));
     }
 }

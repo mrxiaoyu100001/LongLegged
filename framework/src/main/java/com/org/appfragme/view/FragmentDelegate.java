@@ -22,15 +22,11 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.databind.Subject;
-import com.org.appfragme.presenter.FragmentPresenter;
-import com.org.appfragme.utils.ViewInject;
 import com.org.appfragme.widget.ActionBar;
-import com.org.appfragme.widget.CommonTitleBar;
 
 
 /**
@@ -51,8 +47,6 @@ import com.org.appfragme.widget.CommonTitleBar;
 public abstract class FragmentDelegate implements IDelegate, View.OnClickListener {
     protected final SparseArray<View> mViews = new SparseArray<View>();
     protected View rootView;
-    /*当前fragment*/
-    private FragmentPresenter currentFragment;
     private CallBack callBack;
     private Subject subject;
 
@@ -124,11 +118,6 @@ public abstract class FragmentDelegate implements IDelegate, View.OnClickListene
     public <T extends Activity> T getActivity() {
         return (T) rootView.getContext();
     }
-
-    public DataBindFragment getFragment() {
-        return (DataBindFragment) currentFragment;
-    }
-
 
     public void setCallBack(CallBack callBack) {
         this.callBack = callBack;

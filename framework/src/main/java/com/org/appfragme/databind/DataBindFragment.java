@@ -20,7 +20,8 @@ import android.view.View;
 
 import com.org.appfragme.model.IModel;
 import com.org.appfragme.presenter.FragmentPresenter;
-import com.org.appfragme.view.AppDelegate;
+import com.org.appfragme.view.ActivityDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 
 /**
  * @Created: xiaoyu  on 2017.12.06 17:34.
@@ -33,7 +34,7 @@ import com.org.appfragme.view.AppDelegate;
  * @Resources:
  * @Remark:
  */
-public abstract class DataBindFragment<T extends AppDelegate> extends
+public abstract class DataBindFragment<T extends FragmentDelegate> extends
         FragmentPresenter<T> {
 
     protected DataBinder binder;

@@ -1,13 +1,9 @@
 package com.xiaoyu.longlegged.delegate;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toolbar;
 
-import com.org.appfragme.view.AppDelegate;
-import com.org.appfragme.view.IDelegate;
+import com.org.appfragme.view.ActivityDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.common.AppMethod;
@@ -27,7 +23,7 @@ import java.util.TimerTask;
  * @Remark:
  */
 
-public class WelcomeDelegate extends AppDelegate {
+public class WelcomeDelegate extends FragmentDelegate {
 
     @Override
     public int getRootLayoutId() {

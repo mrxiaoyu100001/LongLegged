@@ -9,12 +9,12 @@ import android.widget.TextView;
 import com.org.appfragme.utils.Constant;
 import com.org.appfragme.utils.DensityUtils;
 import com.org.appfragme.utils.RecyclerViewItemDecoration;
-import com.org.appfragme.utils.XXXLog;
-import com.org.appfragme.view.AppDelegate;
-import com.xiaoyu.longlegged.MyApplication;
+import com.org.appfragme.view.ActivityDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.adapter.MoreDataAdapter;
 import com.xiaoyu.longlegged.base.FragmentPage;
+import com.xiaoyu.longlegged.common.AppMethod;
 import com.xiaoyu.longlegged.modle.MoreData;
 import com.xiaoyu.longlegged.modle.MoreDataList;
 
@@ -30,7 +30,7 @@ import com.xiaoyu.longlegged.modle.MoreDataList;
  * @Remark:
  */
 
-public class MoreDataDelegate extends AppDelegate {
+public class MoreDataDelegate extends FragmentDelegate {
 
     private RecyclerView rv_content;
     private TextView tv_content;
@@ -69,7 +69,7 @@ public class MoreDataDelegate extends AppDelegate {
         super.widgetClick(view);
         Bundle bundle = new Bundle();
         bundle.putString(Constant.Constant_key, "1234567890123456789");
-        finishResult(FragmentPage.Othor.getClazz(), bundle);
+        AppMethod.postShowWith(this.getActivity(), FragmentPage.Othor, bundle);
     }
 
     /**

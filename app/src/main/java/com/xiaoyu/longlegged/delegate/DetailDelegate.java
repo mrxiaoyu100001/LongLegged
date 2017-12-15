@@ -1,6 +1,7 @@
 package com.xiaoyu.longlegged.delegate;
 
-import com.org.appfragme.view.AppDelegate;
+import com.org.appfragme.view.ActivityDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 import com.xiaoyu.longlegged.R;
 
 /**
@@ -15,7 +16,7 @@ import com.xiaoyu.longlegged.R;
  * @Remark:
  */
 
-public class DetailDelegate extends AppDelegate {
+public class DetailDelegate extends FragmentDelegate {
 
     @Override
     public int getRootLayoutId() {

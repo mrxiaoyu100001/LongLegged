@@ -9,7 +9,6 @@
         android:id="@+id/frag_ct_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        titlebar:centerText="@string/app_name"
         titlebar:centerTextColor="@color/color_ffffff"
         titlebar:centerTextSize="18sp"
         titlebar:titleBarColor="@color/color_A973FB"
@@ -18,7 +17,7 @@
         titlebar:leftType="imageButton"
         titlebar:leftImageResource="@mipmap/main_left"
         titlebar:rightImageResource="@mipmap/add_03"
-        titlebar:rightType="imageButton"
+        titlebar:rightType="textView"
         titlebar:titleBarHeight="44dp" />
 
     <FrameLayout

@@ -27,8 +27,4 @@ public interface Subject<D> {
     void notifyChange(D data);
 
     void notifyChage(D data, Bundle bundle);
-
-    void changeTitle();
-
-    void changeTitle(D data);
 }

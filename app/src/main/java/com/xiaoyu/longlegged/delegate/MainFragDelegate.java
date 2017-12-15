@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.org.appfragme.utils.Constant;
-import com.org.appfragme.view.AppDelegate;
+import com.org.appfragme.view.ActivityDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.common.AppMethod;
@@ -21,7 +22,7 @@ import com.xiaoyu.longlegged.common.AppMethod;
  * @Remark:
  */
 
-public class MainFragDelegate extends AppDelegate {
+public class MainFragDelegate extends FragmentDelegate {
 
     @Override
     public int getRootLayoutId() {

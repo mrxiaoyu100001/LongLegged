@@ -1,19 +1,15 @@
 package com.xiaoyu.longlegged.delegate;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.org.appfragme.utils.BindView;
 import com.org.appfragme.utils.Constant;
-import com.org.appfragme.utils.XXXLog;
-import com.org.appfragme.view.AppDelegate;
+import com.org.appfragme.view.ActivityDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.common.AppMethod;
 import com.xiaoyu.longlegged.modle.MoreData;
-
-import static android.R.attr.id;
 
 /**
  * @Created: xiaoyu  on 2017.12.05 15:19.
@@ -27,7 +23,7 @@ import static android.R.attr.id;
  * @Remark:
  */
 
-public class SearchDelegate extends AppDelegate implements View.OnClickListener {
+public class SearchDelegate extends FragmentDelegate implements View.OnClickListener {
 
     private TextView tv_sub;
 

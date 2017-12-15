@@ -699,20 +699,22 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
      *
      * @param color
      */
-    public void setStatusBarColor(int color) {
+    public CommonTitleBar setStatusBarColor(int color) {
         if (viewStatusBarFill != null) {
             viewStatusBarFill.setBackgroundColor(color);
         }
+        return this;
     }
 
     /**
      * 设置背景图片
      * @param resId
      */
-    public void setStatusBarPic(int resId){
+    public CommonTitleBar setStatusBarPic(int resId){
         if(viewStatusBarFill != null){
             viewStatusBarFill.setBackgroundResource(resId);
         }
+        return this;
     }
 
     /**
@@ -720,10 +722,11 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
      *
      * @param show
      */
-    public void showStatusBar(boolean show) {
+    public CommonTitleBar showStatusBar(boolean show) {
         if (viewStatusBarFill != null) {
             viewStatusBarFill.setVisibility(show ? View.VISIBLE : View.GONE);
         }
+        return this;
     }
 
     /**
@@ -849,7 +852,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
     /**
      * @param leftView
      */
-    public void setLeftView(View leftView) {
+    public CommonTitleBar setLeftView(View leftView) {
         if (leftView.getId() == View.NO_ID) {
             leftView.setId(AppUtils.generateViewId());
         }
@@ -857,12 +860,13 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         leftInnerParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         leftInnerParams.addRule(RelativeLayout.CENTER_VERTICAL);
         rlMain.addView(leftView, leftInnerParams);
+        return this;
     }
 
     /**
      * @param centerView
      */
-    public void setCenterView(View centerView) {
+    public CommonTitleBar setCenterView(View centerView) {
         if (centerView.getId() == View.NO_ID) {
             centerView.setId(AppUtils.generateViewId());
         }
@@ -870,12 +874,13 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         centerInnerParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         centerInnerParams.addRule(RelativeLayout.CENTER_VERTICAL);
         rlMain.addView(centerView, centerInnerParams);
+        return this;
     }
 
     /**
      * @param rightView
      */
-    public void setRightView(View rightView) {
+    public CommonTitleBar setRightView(View rightView) {
         if (rightView.getId() == View.NO_ID) {
             rightView.setId(AppUtils.generateViewId());
         }
@@ -883,20 +888,23 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         rightInnerParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         rightInnerParams.addRule(RelativeLayout.CENTER_VERTICAL);
         rlMain.addView(rightView, rightInnerParams);
+        return this;
     }
 
     /**
      * 显示中间进度条
      */
-    public void showCenterProgress() {
+    public CommonTitleBar showCenterProgress() {
         progressCenter.setVisibility(View.VISIBLE);
+        return this;
     }
 
     /**
      * 隐藏中间进度条
      */
-    public void dismissCenterProgress() {
+    public CommonTitleBar dismissCenterProgress() {
         progressCenter.setVisibility(View.GONE);
+        return this;
     }
 
     /**
@@ -904,7 +912,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
      *
      * @return
      */
-    public void showSoftInputKeyboard(boolean show) {
+    public CommonTitleBar showSoftInputKeyboard(boolean show) {
         if (centerSearchEdiable && show) {
             etSearchHint.setFocusable(true);
             etSearchHint.setFocusableInTouchMode(true);
@@ -913,6 +921,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         } else {
             DensityUtils.hideSoftInputKeyBoard(getContext(), etSearchHint);
         }
+        return this;
     }
 
     /**
@@ -920,10 +929,11 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
      *
      * @param res
      */
-    public void setSearchRightImageResource(int res) {
+    public CommonTitleBar setSearchRightImageResource(int res) {
         if (ivVoice != null) {
             ivVoice.setImageResource(res);
         }
+        return this;
     }
 
     /**
@@ -942,12 +952,14 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
      * @param listener
      */
 
-    public void setListener(OnTitleBarListener listener) {
+    public CommonTitleBar setListener(OnTitleBarListener listener) {
         this.listener = listener;
+        return this;
     }
 
-    public void setDoubleClickListener(OnTitleBarDoubleClickListener doubleClickListener) {
+    public CommonTitleBar setDoubleClickListener(OnTitleBarDoubleClickListener doubleClickListener) {
         this.doubleClickListener = doubleClickListener;
+        return this;
     }
 
     /**

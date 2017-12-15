@@ -19,7 +19,7 @@ import android.os.Bundle;
 
 import com.org.appfragme.model.IModel;
 import com.org.appfragme.presenter.ActivityPresenter;
-import com.org.appfragme.view.IDelegate;
+import com.org.appfragme.view.ActivityDelegate;
 
 /**
  * @Created: xiaoyu  on 2017.12.04 15:20.
@@ -32,13 +32,19 @@ import com.org.appfragme.view.IDelegate;
  * @Resources:
  * @Remark:
  */
-public abstract class DataBindActivity<T extends IDelegate> extends ActivityPresenter<T> {
+public abstract class DataBindActivity<T extends ActivityDelegate> extends ActivityPresenter<T> {
     protected DataBinder binder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binder = getDataBinder();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewDelegate.setTitleBar(viewDelegate.getActionBar());
     }
 
     public abstract DataBinder getDataBinder();

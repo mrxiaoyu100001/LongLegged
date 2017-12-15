@@ -18,6 +18,4 @@ public interface Observer<D> {
     public void updatePage();
     public void updatePage(D data);
     public void updatePage(Class<?> cla, Bundle bundle);
-    public void updateTitle();
-    public void updateTitle(D data);
 }

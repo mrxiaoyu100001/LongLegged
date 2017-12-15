@@ -16,10 +16,12 @@
 package com.org.appfragme.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
+
+import com.org.appfragme.widget.ActionBar;
 
 /**
  *
@@ -41,9 +43,9 @@ public interface IDelegate {
 
     int getOptionsMenuId();
 
-    Toolbar getToolbar();
-
     View getRootView();
+
+    void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException;
 
     void initWidget(View contentView);
 

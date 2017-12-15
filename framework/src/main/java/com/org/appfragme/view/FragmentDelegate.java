@@ -17,20 +17,20 @@ package com.org.appfragme.view;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.org.appfragme.R;
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.databind.Subject;
-import com.org.appfragme.presenter.ActivityPresenter;
 import com.org.appfragme.presenter.FragmentPresenter;
+import com.org.appfragme.utils.ViewInject;
+import com.org.appfragme.widget.ActionBar;
+import com.org.appfragme.widget.CommonTitleBar;
 
 
 /**
@@ -48,7 +48,7 @@ import com.org.appfragme.presenter.FragmentPresenter;
  * @Resources:
  * @Remark:
  */
-public abstract class AppDelegate implements IDelegate, View.OnClickListener {
+public abstract class FragmentDelegate implements IDelegate, View.OnClickListener {
     protected final SparseArray<View> mViews = new SparseArray<View>();
     protected View rootView;
     /*当前fragment*/
@@ -70,10 +70,6 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
         return 0;
     }
 
-    public Toolbar getToolbar() {
-        return null;
-    }
-
     @Override
     public View getRootView() {
         return rootView;
@@ -81,6 +77,11 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
 
     public void setRootView(View rootView) {
         this.rootView = rootView;
+    }
+
+    @Override
+    public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
+
     }
 
     @Override
@@ -120,10 +121,6 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
         }
     }
 
-    public void toast(CharSequence msg) {
-        Toast.makeText(rootView.getContext(), msg, Toast.LENGTH_SHORT).show();
-    }
-
     public <T extends Activity> T getActivity() {
         return (T) rootView.getContext();
     }
@@ -132,61 +129,6 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
         return (DataBindFragment) currentFragment;
     }
 
-    /**
-     * 界面跳转
-     *
-     * @param resView
-     * @param mFragment
-     */
-    public void enterChangeFragment(int resView, FragmentPresenter mFragment) {
-        if (mFragment == null && mFragment.equals(currentFragment)) {
-            return;
-        }
-        FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out);
-        if (!mFragment.isAdded()) {
-            transaction.add(resView, mFragment, mFragment.getClass()
-                    .getName());
-            /*添加回退栈*/
-//            transaction.addToBackStack(mFragment.getClass().getName());
-        }
-        if (mFragment.isHidden()) {
-            transaction.show(mFragment);
-        }
-        if (currentFragment != null && currentFragment.isVisible()) {
-            transaction.hide(currentFragment);
-        }
-        currentFragment = mFragment;
-        transaction.commit();
-    }
-
-    /**
-     * 界面回退
-     *
-     * @param resView
-     * @param mFragment
-     */
-    public void outChangeFragment(int resView, FragmentPresenter mFragment) {
-        if (mFragment == null && mFragment.equals(currentFragment)) {
-            return;
-        }
-        FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out);
-        if (!mFragment.isAdded()) {
-            transaction.add(resView, mFragment, mFragment.getClass()
-                    .getName());
-            /*添加回退栈*/
-//            transaction.addToBackStack(mFragment.getClass().getName());
-        }
-        if (mFragment.isHidden()) {
-            transaction.show(mFragment);
-        }
-        if (currentFragment != null && currentFragment.isVisible()) {
-            transaction.hide(currentFragment);
-        }
-        currentFragment = mFragment;
-        transaction.commit();
-    }
 
     public void setCallBack(CallBack callBack) {
         this.callBack = callBack;
@@ -210,22 +152,6 @@ public abstract class AppDelegate implements IDelegate, View.OnClickListener {
     public void finishResult() {
         if (subject != null) {
             subject.notifyChange();
-        }
-    }
-
-    /**
-     * 这两个方法冗余了，但是先留着吧，后期再去做维护。
-     * @param cla
-     */
-    public void finishResult(Class<?> cla) {
-        if (subject != null) {
-            subject.notifyChange(cla);
-        }
-    }
-
-    public void finishResult(Class<?> cla, Bundle bundle) {
-        if (subject != null) {
-            subject.notifyChage(cla, bundle);
         }
     }
 }

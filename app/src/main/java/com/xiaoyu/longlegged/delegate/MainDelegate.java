@@ -1,15 +1,19 @@
 package com.xiaoyu.longlegged.delegate;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.FragmentSuject;
 import com.org.appfragme.databind.Observer;
 import com.org.appfragme.presenter.FragmentPresenter;
+import com.org.appfragme.utils.ActionBarHelper;
 import com.org.appfragme.utils.ViewInject;
-import com.org.appfragme.utils.XXXLog;
-import com.org.appfragme.view.AppDelegate;
+import com.org.appfragme.view.ActivityDelegate;
+import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.widget.ActionBar;
+import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.MyApplication;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
@@ -27,7 +31,7 @@ import com.xiaoyu.longlegged.base.Mediator;
  * @Remark:
  */
 
-public class MainDelegate extends AppDelegate implements Mediator, Observer<FragmentPage> {
+public class MainDelegate extends ActivityDelegate implements Mediator, Observer<FragmentPage> {
 
     @Override
     public int getRootLayoutId() {
@@ -38,6 +42,17 @@ public class MainDelegate extends AppDelegate implements Mediator, Observer<Frag
     public void initWidget(View contentView) {
         super.initWidget(contentView);
         changePage(FragmentPage.Wellcome);
+    }
+
+    @Override
+    public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
+        super.setTitleBar(titleBar);
+        FragmentPresenter presenter = MyApplication.fragmentStack.getBackStackTop();
+        FragmentDelegate delegate = presenter.viewDelegate;
+        delegate.setTitleBar(titleBar);
+        ActionBarHelper
+                .getInstance((CommonTitleBar) get(R.id.frag_ct_title), titleBar)
+                .builder();
     }
 
     @Override
@@ -52,6 +67,7 @@ public class MainDelegate extends AppDelegate implements Mediator, Observer<Frag
     public void changePage(FragmentPage page, Bundle bundle) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        FragmentDelegate delegate = presenter.viewDelegate;
         presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), null);
         presenter.setArguments(bundle);
         enterChangeFragment(R.id.act_fl_content, presenter);
@@ -61,6 +77,7 @@ public class MainDelegate extends AppDelegate implements Mediator, Observer<Frag
     public void changePage(FragmentPage page, int requestCode, CallBack callBack) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        FragmentDelegate delegate = presenter.viewDelegate;
         presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), callBack);
         enterChangeFragment(R.id.act_fl_content, presenter);
     }
@@ -69,6 +86,7 @@ public class MainDelegate extends AppDelegate implements Mediator, Observer<Frag
     public void changePage(FragmentPage page, Bundle bundle, int requestCode, CallBack callBack) {
         Class cla = FragmentPage.getPageByValue(page.getValue());
         FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+        FragmentDelegate delegate = presenter.viewDelegate;
         presenter.setCallBack(FragmentSuject.getInstance().addObserver(this), callBack);
         presenter.setArguments(bundle);
         enterChangeFragment(R.id.act_fl_content, presenter);
@@ -124,15 +142,5 @@ public class MainDelegate extends AppDelegate implements Mediator, Observer<Frag
     @Override
     public void updatePage(Class<?> data, Bundle bundle) {
         backOutPage(data, bundle);
-    }
-
-    @Override
-    public void updateTitle() {
-
-    }
-
-    @Override
-    public void updateTitle(FragmentPage data) {
-
     }
 }

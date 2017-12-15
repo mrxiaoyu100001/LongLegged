@@ -69,39 +69,17 @@ public class FragmentSuject implements Subject {
         notify(data, bundle);
     }
 
-    @Override
-    public void changeTitle() {
-        change(null);
-    }
-
-    @Override
-    public void changeTitle(Object data) {
-        change(data);
-    }
-
     private void notify(Object object, Bundle bundle) {
         if (observers != null) {
             for (Observer observer : observers) {
                 if (bundle == null) {
                     if (object == null) {
-                            observer.updatePage();
+                        observer.updatePage();
                     } else {
                         observer.updatePage(object);
                     }
                 } else {
                     observer.updatePage((Class<?>) object, bundle);
-                }
-            }
-        }
-    }
-
-    private void change(Object object) {
-        if (observers != null) {
-            for (Observer observer : observers) {
-                if (object == null) {
-                    observer.updateTitle();
-                } else {
-                    observer.updateTitle(object);
                 }
             }
         }

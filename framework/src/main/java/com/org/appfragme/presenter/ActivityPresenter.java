@@ -16,12 +16,17 @@
 package com.org.appfragme.presenter;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toolbar;
 import android.view.Menu;
 
 import com.org.appfragme.databind.Observer;
 import com.org.appfragme.utils.AnnotateUtil;
+import com.org.appfragme.utils.XXXLog;
+import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.IDelegate;
+import com.org.appfragme.widget.CommonTitleBar;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 
 /**
@@ -35,7 +40,7 @@ import com.trello.rxlifecycle.components.support.RxFragmentActivity;
  * @Resources:
  * @Remark:
  */
-public abstract class ActivityPresenter<T extends IDelegate> extends RxFragmentActivity {
+public abstract class ActivityPresenter<T extends ActivityDelegate> extends RxFragmentActivity {
     protected T viewDelegate;
     public ActivityPresenter presenter;
 
@@ -56,6 +61,7 @@ public abstract class ActivityPresenter<T extends IDelegate> extends RxFragmentA
         ActivityStack.create().addActivity(this);
         viewDelegate.create(getLayoutInflater(), null, savedInstanceState);
         setContentView(viewDelegate.getRootView());
+        initata();
         viewDelegate.initWidget(viewDelegate.getRootView());
         bindEvenListener();
     }
@@ -63,19 +69,9 @@ public abstract class ActivityPresenter<T extends IDelegate> extends RxFragmentA
     protected void bindEvenListener() {
     }
 
-    protected void initToolbar() {
-        Toolbar toolbar = viewDelegate.getToolbar();
-        if (toolbar != null) {
-//            setSupportActionBar(toolbar);
-            setActionBar(toolbar);
-        }
-    }
-
-
     @Override
     protected void onResume() {
         super.onResume();
-        initata();
     }
 
     protected void initata() {

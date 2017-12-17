@@ -1,11 +1,14 @@
 package com.xiaoyu.longlegged.delegate;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
 import com.org.appfragme.utils.Constant;
 import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.widget.ActionBar;
+import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.common.AppMethod;
@@ -38,6 +41,14 @@ public class SearchDelegate extends FragmentDelegate implements View.OnClickList
         tv_sub = bindView(R.id.frag_tv_sub3);
         setOnClickListener(this, R.id.frag_tv_sub);
         setOnClickListener(this, R.id.frag_tv_sub2);
+    }
+
+    @Override
+    public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
+        super.setTitleBar(titleBar);
+        titleBar.setCenterText(R.string.main_sub)
+                .setCenterType(CommonTitleBar.TYPE_CENTER_TEXTVIEW)
+                .setCenterTextColor(R.color.color_ffffff);
     }
 
     @Override

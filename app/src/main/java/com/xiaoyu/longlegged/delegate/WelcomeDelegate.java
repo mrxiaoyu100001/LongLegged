@@ -51,6 +51,5 @@ public class WelcomeDelegate extends FragmentDelegate {
     public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
         super.setTitleBar(titleBar);
         titleBar.setShowTitleBar(false);
-        XXXLog.e(" welcome  走了吗  ？  " + JSON.toJSONString(titleBar));
     }
 }

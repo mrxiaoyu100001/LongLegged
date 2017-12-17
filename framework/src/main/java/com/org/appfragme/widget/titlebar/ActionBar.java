@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.org.appfragme.utils.DensityUtils;
+
 /**
  * @Created: xiaoyu  on 2017.12.13 19:23.
  * @Describe：
@@ -268,17 +270,17 @@ public class ActionBar {
     }
 
     public ActionBar setTitleBarColor(int titleBarColor) {
-        this.titleBarColor = titleBarColor;
+        this.titleBarColor = context.getResources().getColor(titleBarColor);
         return this;
     }
 
     public ActionBar setTitleBarHeight(int titleBarHeight) {
-        this.titleBarHeight = titleBarHeight;
+        this.titleBarHeight = DensityUtils.dp2PxInt(context, titleBarHeight);
         return this;
     }
 
     public ActionBar setStatusBarColor(int statusBarColor) {
-        this.statusBarColor = statusBarColor;
+        this.statusBarColor = context.getResources().getColor(statusBarColor);
         return this;
     }
 
@@ -288,12 +290,12 @@ public class ActionBar {
     }
 
     public ActionBar setBottomLineColor(int bottomLineColor) {
-        this.bottomLineColor = bottomLineColor;
+        this.bottomLineColor = context.getResources().getColor(bottomLineColor);
         return this;
     }
 
     public ActionBar setBottomElevation(float bottomElevation) {
-        this.bottomElevation = bottomElevation;
+        this.bottomElevation = DensityUtils.dp2PxInt(context, bottomElevation);
         return this;
     }
 
@@ -308,12 +310,12 @@ public class ActionBar {
     }
 
     public ActionBar setLeftTextColor(int leftTextColor) {
-        this.leftTextColor = leftTextColor;
+        this.leftTextColor = context.getResources().getColor(leftTextColor);
         return this;
     }
 
     public ActionBar setLeftTextSize(float leftTextSize) {
-        this.leftTextSize = leftTextSize;
+        this.leftTextSize = DensityUtils.dp2PxInt(context, leftTextSize);
         return this;
     }
 
@@ -341,14 +343,18 @@ public class ActionBar {
         this.rightText = rightText;
         return this;
     }
+    public ActionBar setRightText(int rightText) {
+        this.rightText = context.getString(rightText);
+        return this;
+    }
 
     public ActionBar setRightTextColor(int rightTextColor) {
-        this.rightTextColor = rightTextColor;
+        this.rightTextColor = context.getResources().getColor(rightTextColor);
         return this;
     }
 
     public ActionBar setRightTextSize(float rightTextSize) {
-        this.rightTextSize = rightTextSize;
+        this.rightTextSize = DensityUtils.dp2PxInt(context, rightTextSize);
         return this;
     }
 
@@ -378,12 +384,12 @@ public class ActionBar {
     }
 
     public ActionBar setCenterTextColor(int centerTextColor) {
-        this.centerTextColor = centerTextColor;
+        this.centerTextColor = context.getResources().getColor(centerTextColor);
         return this;
     }
 
     public ActionBar setCenterTextSize(float centerTextSize) {
-        this.centerTextSize = centerTextSize;
+        this.centerTextSize = DensityUtils.dp2PxInt(context, centerTextSize);
         return this;
     }
 
@@ -393,7 +399,7 @@ public class ActionBar {
     }
 
     public ActionBar setCenterSubTextColor(int centerSubTextColor) {
-        this.centerSubTextColor = centerSubTextColor;
+        this.centerSubTextColor = context.getResources().getColor(centerSubTextColor);
         return this;
     }
 

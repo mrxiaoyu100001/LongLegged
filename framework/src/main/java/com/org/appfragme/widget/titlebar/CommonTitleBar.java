@@ -180,6 +180,12 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         initMainViews(context);
     }
 
+    /**
+     * 初始化自定义属性
+     *
+     * @param context
+     * @param attrs
+     */
     private void loadAttributes(Context context, AttributeSet attrs) {
         PADDING_5 = DensityUtils.dp2PxInt(context, 5);
         PADDING_12 = DensityUtils.dp2PxInt(context, 12);
@@ -645,7 +651,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (listener != null && actionId == EditorInfo.IME_ACTION_SEARCH) {
-                listener.onClicked(v, ACTION_SEARCH_SUBMIT, etSearchHint.getText().toString());
+                listener.onBarClicked(v, ACTION_SEARCH_SUBMIT, etSearchHint.getText().toString());
             }
             return false;
         }
@@ -660,29 +666,29 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         if (v.equals(llMainCenter) && doubleClickListener != null) {
             long currentClickMillis = System.currentTimeMillis();
             if (currentClickMillis - lastClickMillis < 500) {
-                doubleClickListener.onClicked(v);
+                doubleClickListener.onDoubleClicked(v);
             }
             lastClickMillis = currentClickMillis;
         } else if (v.equals(tvLeft)) {
-            listener.onClicked(v, ACTION_LEFT_TEXT, null);
+            listener.onBarClicked(v, ACTION_LEFT_TEXT, null);
         } else if (v.equals(btnLeft)) {
-            listener.onClicked(v, ACTION_LEFT_BUTTON, null);
+            listener.onBarClicked(v, ACTION_LEFT_BUTTON, null);
         } else if (v.equals(tvRight)) {
-            listener.onClicked(v, ACTION_RIGHT_TEXT, null);
+            listener.onBarClicked(v, ACTION_RIGHT_TEXT, null);
         } else if (v.equals(btnRight)) {
-            listener.onClicked(v, ACTION_RIGHT_BUTTON, null);
+            listener.onBarClicked(v, ACTION_RIGHT_BUTTON, null);
         } else if (v.equals(etSearchHint) || v.equals(ivSearch)) {
-            listener.onClicked(v, ACTION_SEARCH, null);
+            listener.onBarClicked(v, ACTION_SEARCH, null);
         } else if (v.equals(ivVoice)) {
             etSearchHint.setText("");
             if (centerSearchRightType == TYPE_CENTER_SEARCH_RIGHT_VOICE) {
                 // 语音按钮被点击
-                listener.onClicked(v, ACTION_SEARCH_VOICE, null);
+                listener.onBarClicked(v, ACTION_SEARCH_VOICE, null);
             } else {
-                listener.onClicked(v, ACTION_SEARCH_DELETE, null);
+                listener.onBarClicked(v, ACTION_SEARCH_DELETE, null);
             }
         } else if (v.equals(tvCenter)) {
-            listener.onClicked(v, ACTION_CENTER_TEXT, null);
+            listener.onBarClicked(v, ACTION_CENTER_TEXT, null);
         }
     }
 
@@ -885,6 +891,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置左侧图片
+     *
      * @param leftImageResource
      * @return
      */
@@ -895,6 +902,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置左侧图片drawable资源
+     *
      * @param leftDrawable
      * @return
      */
@@ -905,6 +913,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置左侧按钮内边距
+     *
      * @param leftDrawablePadding
      * @return
      */
@@ -915,6 +924,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置左侧自定义布局
+     *
      * @param leftCustomViewRes
      * @return
      */
@@ -925,6 +935,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置右侧显示类型
+     *
      * @param rightType
      * @return
      */
@@ -932,6 +943,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         this.rightType = rightType;
         return this;
     }
+
     /**
      * 获取标题栏右边TextView，对应rightType = textView
      *
@@ -974,8 +986,10 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
         this.rightTextSize = rightTextSize;
         return this;
     }
+
     /**
      * 设置左侧图片
+     *
      * @param rightImageResource
      * @return
      */
@@ -987,6 +1001,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置左侧自定义布局
+     *
      * @param rightCustomViewRes
      * @return
      */
@@ -1010,6 +1025,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置中间显示类型
+     *
      * @param centerType
      * @return
      */
@@ -1029,18 +1045,18 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置中间文字
+     *
      * @param centerText
      * @return
      */
     public CommonTitleBar setCenterText(String centerText) {
         this.centerText = centerText;
-        XXXLog.e("幼稚吗 ？   " + centerText);
-        XXXLog.e("幼稚吗 ？ ----------------  " + this.centerText);
         return this;
     }
 
     /**
      * 设置中间文字颜色
+     *
      * @param centerTextColor
      * @return
      */
@@ -1051,6 +1067,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     /**
      * 设置中间文字大小
+     *
      * @param centerTextSize
      * @return
      */
@@ -1261,6 +1278,7 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     public CommonTitleBar setListener(OnTitleBarListener listener) {
         this.listener = listener;
+        XXXLog.e("   listener    ?    " + this.listener);
         return this;
     }
 
@@ -1291,22 +1309,35 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
          * @param action 对应ACTION_XXX, 如ACTION_LEFT_TEXT
          * @param extra  中间为搜索框时,如果可输入,点击键盘的搜索按钮,会返回输入关键词
          */
-        void onClicked(View v, int action, String extra);
+        void onBarClicked(View v, int action, String extra);
     }
 
     /**
      * 标题栏双击事件监听
      */
     public interface OnTitleBarDoubleClickListener {
-        void onClicked(View v);
+        void onDoubleClicked(View v);
     }
 
     /**
      * 重新初始化组件
+     *
      * @return
      */
     public CommonTitleBar builder() {
         initMainViews(context);
+        return this;
+    }
+
+    /**
+     * 移除所有控件
+     *
+     * @return
+     */
+    public CommonTitleBar reBuilder() {
+        if (rlMain != null) {
+            rlMain.removeAllViews();
+        }
         return this;
     }
 }

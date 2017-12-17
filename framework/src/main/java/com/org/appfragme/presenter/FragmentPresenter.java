@@ -116,6 +116,8 @@ public abstract class FragmentPresenter<T extends FragmentDelegate> extends Frag
     public void onDestroy() {
         super.onDestroy();
         viewDelegate = null;
+        callBack = null;
+        suject = null;
     }
 
     protected abstract Class<T> getDelegateClass();

@@ -9,10 +9,8 @@ import com.org.appfragme.databind.FragmentSuject;
 import com.org.appfragme.databind.Observer;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.utils.ActionBarHelper;
-import com.org.appfragme.utils.ViewInject;
 import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.ActivityDelegate;
-import com.org.appfragme.view.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.MyApplication;
@@ -50,9 +48,9 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
     public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
         super.setTitleBar(titleBar);
         ActionBarHelper
-                .getInstance(this.getActivity(), (CommonTitleBar) get(R.id.frag_ct_title), titleBar)
-                .builderActionBar()
-                .builder();
+                .getInstance((CommonTitleBar) get(R.id.frag_ct_title), titleBar)
+                .builder()
+                .builderActionBar();
     }
 
     @Override
@@ -107,7 +105,9 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
     }
 
     private void backOutPage() {
-        outChangeFragment(R.id.act_fl_content, MyApplication.fragmentStack.getNextFragment());
+        FragmentPresenter presenter = MyApplication.fragmentStack.getNextFragment();
+        presenter.onResume();
+        outChangeFragment(R.id.act_fl_content, presenter);
         MyApplication.fragmentStack.removeTopStack();
     }
 

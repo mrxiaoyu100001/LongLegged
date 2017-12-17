@@ -10,15 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         titlebar:centerTextColor="@color/color_ffffff"
-        titlebar:centerTextSize="18sp"
         titlebar:titleBarColor="@color/color_A973FB"
         titlebar:centerType="textView"
         titlebar:fillStatusBar="true"
         titlebar:leftType="imageButton"
-        titlebar:leftImageResource="@mipmap/icon_back_white"
-        titlebar:rightImageResource="@mipmap/add_03"
-        titlebar:rightType="textView"
-        titlebar:titleBarHeight="44dp" />
+        titlebar:rightType="textView" />
 
     <FrameLayout
         android:id="@+id/act_fl_content"

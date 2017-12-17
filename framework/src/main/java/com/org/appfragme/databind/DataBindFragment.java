@@ -23,6 +23,7 @@ import com.org.appfragme.presenter.ActivityPresenter;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.widget.ActionBar;
 
 /**
  * @Created: xiaoyu  on 2017.12.06 17:34.
@@ -39,6 +40,7 @@ public abstract class DataBindFragment<T extends FragmentDelegate> extends
         FragmentPresenter<T> {
 
     protected DataBinder binder;
+    private ActionBar actionBar;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -48,12 +50,17 @@ public abstract class DataBindFragment<T extends FragmentDelegate> extends
         initData(getArguments());
     }
 
-    /*初始化标题*/
+    /**
+     * 初始化标题
+     *
+     * @param activityPresenter
+     */
     public void refreshTitleBar(ActivityPresenter activityPresenter) {
         if (activityPresenter != null) {
             ActivityDelegate activityDelegate = activityPresenter.getViewDelegate();
-            viewDelegate.setTitleBar(activityDelegate.getActionBar());
-            activityDelegate.setTitleBar(activityDelegate.getActionBar());
+            if (actionBar == null) actionBar = activityDelegate.getActionBar(getContext());
+            viewDelegate.setTitleBar(actionBar);
+            activityDelegate.setTitleBar(actionBar);
         }
     }
 

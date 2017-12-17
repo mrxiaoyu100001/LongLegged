@@ -16,6 +16,7 @@
 package com.org.appfragme.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
@@ -185,7 +186,7 @@ public abstract class ActivityDelegate implements IDelegate, View.OnClickListene
         getActivity().finish();
     }
 
-    public ActionBar getActionBar() {
-        return ActionBar.getInstance(this.getActivity());
+    public ActionBar getActionBar(Context context) {
+        return ActionBar.getInstance(context);
     }
 }

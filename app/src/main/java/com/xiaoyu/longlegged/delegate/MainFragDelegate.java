@@ -1,16 +1,14 @@
 package com.xiaoyu.longlegged.delegate;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.alibaba.fastjson.JSON;
 import com.org.appfragme.utils.Constant;
 import com.org.appfragme.utils.XXXLog;
-import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
+import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;
 import com.xiaoyu.longlegged.common.AppMethod;
@@ -43,12 +41,20 @@ public class MainFragDelegate extends FragmentDelegate {
     @Override
     public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
         super.setTitleBar(titleBar);
-        Resources resources = getActivity().getResources();
         titleBar.setShowTitleBar(true)
-                .setLeftDrawable(R.mipmap.main_left)
-                .setCenterText(R.string.app_name);
-        XXXLog.e("mainfrag  走了吗？  " + titleBar.getCenterText());
-        XXXLog.e("mainfrag  走了吗？  " + JSON.toJSONString(titleBar));
+                .setLeftImageResource(R.mipmap.main_left)
+                .setCenterType(CommonTitleBar.TYPE_CENTER_TEXTVIEW)
+                .setCenterText(R.string.app_name)
+                .setCenterTextColor(R.color.color_ffffff)
+                .setCenterTextSize(18)
+                .setRightType(CommonTitleBar.TYPE_RIGHT_IMAGEBUTTON)
+                .setRightImageResource(R.mipmap.add_03);
+    }
+
+    @Override
+    public void onBarClicked(View v, int action, String extra) {
+        super.onBarClicked(v, action, extra);
+        XXXLog.e(" 点击了 ？          " + action + "  " + extra);
     }
 
     @Override

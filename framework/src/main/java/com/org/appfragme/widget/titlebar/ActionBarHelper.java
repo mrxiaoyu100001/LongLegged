@@ -1,17 +1,15 @@
 package com.org.appfragme.utils;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 
-import com.alibaba.fastjson.JSON;
 import com.org.appfragme.R;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 
 /**
  * @Created: xiaoyu  on 2017.12.15 11:11.
- * @Describe：
+ * @Describe：公用标题栏
  * @Review：
  * @Modify：
  * @Version: v_1.0 on 2017.12.15 11:11.
@@ -26,17 +24,18 @@ public class ActionBarHelper {
     private ActionBar actionBar;
     private CommonTitleBar titleBar;
     private static ActionBarHelper instance;
-    private Context context;
 
-    private ActionBarHelper() {}
-    private ActionBarHelper(Context context, CommonTitleBar titleBar, ActionBar actionBar) {
-        this.context = context;
+    private ActionBarHelper() {
+    }
+
+    private ActionBarHelper(CommonTitleBar titleBar, ActionBar actionBar) {
         this.actionBar = actionBar;
         this.titleBar = titleBar;
     }
 
     /**
      * 初始化
+     *
      * @return
      */
     public static ActionBarHelper getInstance() {
@@ -52,16 +51,16 @@ public class ActionBarHelper {
 
     /**
      * 获取标题辅助类
-     * @param context
+     *
      * @param titleBar
      * @param actionBar
      * @return
      */
-    public static ActionBarHelper getInstance(Context context, CommonTitleBar titleBar, ActionBar actionBar) {
+    public static ActionBarHelper getInstance(CommonTitleBar titleBar, ActionBar actionBar) {
         if (instance == null) {
             synchronized (ActionBarHelper.class) {
                 if (instance == null) {
-                    instance = new ActionBarHelper(context, titleBar, actionBar);
+                    instance = new ActionBarHelper(titleBar, actionBar);
                 }
             }
         }
@@ -69,7 +68,6 @@ public class ActionBarHelper {
     }
 
     /**
-     *
      * @return
      */
     public boolean clearHelper() {
@@ -83,12 +81,10 @@ public class ActionBarHelper {
      * @return
      */
     public ActionBarHelper builder() {
-        XXXLog.e("Helper   走了吗 ？  " + JSON.toJSONString(actionBar));
         if (actionBar != null && titleBar != null) {
             if (!actionBar.isShowTitleBar()) {
                 titleBar.setVisibility(View.GONE);
             } else {
-                XXXLog.v("  ---------------------  " + actionBar.getCenterText());
                 titleBar.setVisibility(View.VISIBLE);
                 titleBar.setLeftType(actionBar.getLeftType())
                         .setLeftText(actionBar.getLeftText())
@@ -101,6 +97,7 @@ public class ActionBarHelper {
                         .setRightType(actionBar.getRightType())
                         .setRightText(actionBar.getRightText())
                         .setRightTextColor(actionBar.getRightTextColor())
+                        .setRightImageResource(actionBar.getRightImageResource())
                         .setRightCustomViewRes(actionBar.getRightCustomViewRes())
                         .setCenterType(actionBar.getCenterType())
                         .setCenterText(actionBar.getCenterText())
@@ -119,6 +116,7 @@ public class ActionBarHelper {
                         .setStatusBarColor(actionBar.getStatusBarColor())
                         .setShowBottomLine(actionBar.isShowBottomLine())
                         .setBottomElevation(actionBar.getBottomElevation())
+                        .reBuilder()
                         .builder();
             }
         }
@@ -133,33 +131,32 @@ public class ActionBarHelper {
     public ActionBarHelper builderActionBar() {
         actionBar.setShowTitleBar(true)
                 .setFillStatusBar(true)
-                .setTitleBarColor(Color.parseColor("#ffffff"))
-                .setTitleBarHeight(DensityUtils.dp2PxInt(context, 44))
-                .setStatusBarColor(Color.parseColor("#ffffff"))
+                .setTitleBarColor(R.color.color_ffffff)
+                .setTitleBarHeight(44)
+                .setStatusBarColor(R.color.color_ffffff)
                 .setShowBottomLine(true)
-                .setBottomLineColor(Color.parseColor("#dddddd"))
-                .setBottomElevation(DensityUtils.dp2PxInt(context, 5))
-                .setLeftType(CommonTitleBar.TYPE_LEFT_NONE)
+                .setBottomLineColor(R.color.color_dddddd)
+                .setBottomElevation(5)
+                .setLeftType(CommonTitleBar.TYPE_LEFT_IMAGEBUTTON)
                 .setLeftText("")
-                .setLeftTextColor(context.getResources().getColor(R.color.comm_titlebar_text_selector))
-                .setLeftTextSize(DensityUtils.dp2PxInt(context, 16))
+                .setLeftTextColor(R.color.comm_titlebar_text_selector)
+                .setLeftTextSize(16)
                 .setLeftDrawable(0)
                 .setLeftDrawablePadding(5)
                 .setLeftImageResource(R.drawable.comm_titlebar_reback_selector)
                 .setLeftCustomViewRes(0)
-                .setRightType(CommonTitleBar.TYPE_RIGHT_NONE)
+                .setRightType(CommonTitleBar.TYPE_CENTER_TEXTVIEW)
                 .setRightText("")
-                .setRightTextColor(CommonTitleBar.TYPE_RIGHT_NONE)
-                .setRightTextColor(context.getResources().getColor(R.color.comm_titlebar_text_selector))
-                .setRightTextSize(DensityUtils.dp2PxInt(context, 16))
+                .setRightTextColor(R.color.comm_titlebar_text_selector)
+                .setRightTextSize(16)
                 .setRightImageResource(0)
                 .setRightCustomViewRes(0)
                 .setCenterType(CommonTitleBar.TYPE_CENTER_NONE)
                 .setCenterText("")
-                .setCenterTextColor(Color.parseColor("#333333"))
-                .setCenterTextSize(DensityUtils.dp2PxInt(context, 18))
+                .setCenterTextColor(R.color.color_ff333333)
+                .setCenterTextSize(18)
                 .setCenterSubText("")
-                .setCenterSubTextColor(Color.parseColor("#666666"))
+                .setCenterSubTextColor(R.color.color_666666)
                 .setCenterSearchEdiable(true)
                 .setCenterSearchBgResource(R.drawable.comm_titlebar_search_gray_shape)
                 .setCenterSearchRightType(CommonTitleBar.TYPE_CENTER_SEARCH_RIGHT_VOICE)

@@ -26,7 +26,9 @@ import android.view.ViewGroup;
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.databind.Subject;
+import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.widget.ActionBar;
+import com.org.appfragme.widget.CommonTitleBar;
 
 
 /**
@@ -44,7 +46,8 @@ import com.org.appfragme.widget.ActionBar;
  * @Resources:
  * @Remark:
  */
-public abstract class FragmentDelegate implements IDelegate, View.OnClickListener {
+public abstract class FragmentDelegate implements IDelegate, View.OnClickListener,
+        CommonTitleBar.OnTitleBarListener, CommonTitleBar.OnTitleBarDoubleClickListener {
     protected final SparseArray<View> mViews = new SparseArray<View>();
     protected View rootView;
     private CallBack callBack;
@@ -142,5 +145,15 @@ public abstract class FragmentDelegate implements IDelegate, View.OnClickListene
         if (subject != null) {
             subject.notifyChange();
         }
+    }
+
+    @Override
+    public void onBarClicked(View v, int action, String extra) {
+        XXXLog.e("      onBarCliked                   ");
+    }
+
+    @Override
+    public void onDoubleClicked(View v) {
+        XXXLog.e("      onDoubleClicked                   ");
     }
 }

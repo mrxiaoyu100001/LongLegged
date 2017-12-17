@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.org.appfragme.utils.Constant;
-import com.org.appfragme.utils.XXXLog;
+import com.org.appfragme.utils.ViewInject;
 import com.org.appfragme.view.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
@@ -48,13 +48,20 @@ public class MainFragDelegate extends FragmentDelegate {
                 .setCenterTextColor(R.color.color_ffffff)
                 .setCenterTextSize(18)
                 .setRightType(CommonTitleBar.TYPE_RIGHT_IMAGEBUTTON)
-                .setRightImageResource(R.mipmap.add_03);
+                .setRightImageResource(R.mipmap.main_search);
     }
 
     @Override
     public void onBarClicked(View v, int action, String extra) {
         super.onBarClicked(v, action, extra);
-        XXXLog.e(" 点击了 ？          " + action + "  " + extra);
+        switch (action) {
+            case CommonTitleBar.ACTION_LEFT_BUTTON:
+                ViewInject.showCenterToast(this.getActivity(), "点击了左边");
+                break;
+            case CommonTitleBar.ACTION_RIGHT_BUTTON:
+                ViewInject.showCenterToast(this.getActivity(), "点击了右边");
+                break;
+        }
     }
 
     @Override

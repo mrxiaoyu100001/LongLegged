@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.org.appfragme.databind.DataBindActivity;
 import com.org.appfragme.databind.DataBinder;
+import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.dataBinder.MainDateBinder;
 import com.xiaoyu.longlegged.delegate.MainDelegate;
 
@@ -28,5 +29,10 @@ public class MainActivity extends DataBindActivity<MainDelegate> {
     @Override
     public void onBackPressed() {
         viewDelegate.backChange();
+    }
+
+    @Override
+    protected CommonTitleBar getTitleBar() {
+        return viewDelegate.get(R.id.frag_ct_title);
     }
 }

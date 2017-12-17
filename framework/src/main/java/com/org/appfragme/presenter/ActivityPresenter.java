@@ -103,4 +103,5 @@ public abstract class ActivityPresenter<T extends ActivityDelegate> extends RxFr
     }
 
     protected abstract Class<T> getDelegateClass();
+    protected abstract CommonTitleBar getTitleBar();
 }

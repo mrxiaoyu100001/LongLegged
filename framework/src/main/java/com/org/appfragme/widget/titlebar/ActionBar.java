@@ -2,7 +2,6 @@ package com.org.appfragme.widget;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.org.appfragme.utils.DensityUtils;
 
@@ -306,6 +305,10 @@ public class ActionBar {
 
     public ActionBar setLeftText(String leftText) {
         this.leftText = leftText;
+        return this;
+    }
+    public ActionBar setLeftText(int leftText) {
+        this.leftText = context.getResources().getString(leftText);
         return this;
     }
 

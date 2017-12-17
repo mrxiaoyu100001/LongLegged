@@ -138,10 +138,6 @@ public abstract class FragmentDelegate implements IDelegate, View.OnClickListene
     }
 
     public void finish() {
-        getActivity().finish();
-    }
-
-    public void finishResult() {
         if (subject != null) {
             subject.notifyChange();
         }
@@ -149,11 +145,14 @@ public abstract class FragmentDelegate implements IDelegate, View.OnClickListene
 
     @Override
     public void onBarClicked(View v, int action, String extra) {
-        XXXLog.e("      onBarCliked                   ");
+        //如果左侧点击事件是返回，则不用在子类重载这个方法
+        if (action == CommonTitleBar.ACTION_LEFT_TEXT ||
+                action == CommonTitleBar.ACTION_LEFT_BUTTON) {
+            finish();
+        }
     }
 
     @Override
     public void onDoubleClicked(View v) {
-        XXXLog.e("      onDoubleClicked                   ");
     }
 }

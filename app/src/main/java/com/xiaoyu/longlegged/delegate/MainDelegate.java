@@ -105,22 +105,41 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
     }
 
     private void backOutPage() {
-        FragmentPresenter presenter = MyApplication.fragmentStack.getNextFragment();
-        presenter.onResume();
-        outChangeFragment(R.id.act_fl_content, presenter);
-        MyApplication.fragmentStack.removeTopStack();
+        Class cla = FragmentPage.getPageByValue(FragmentPage.Main.getValue());
+        XXXLog.e("走不走啊？   " + MyApplication.fragmentStack.isTopFragment(cla));
+        if (!MyApplication.fragmentStack.isTopFragment(cla)) {
+            FragmentPresenter presenter = MyApplication.fragmentStack.getNextFragment();
+            presenter.onResume();
+            XXXLog.e("走的哪个？   " + presenter);
+            ((CommonTitleBar) get(R.id.frag_ct_title)).setListener(presenter.viewDelegate);
+            ((CommonTitleBar) get(R.id.frag_ct_title)).setDoubleClickListener(presenter.viewDelegate);
+            outChangeFragment(R.id.act_fl_content, presenter);
+            MyApplication.fragmentStack.removeTopStack();
+        }
     }
 
     private void backOutPage(FragmentPage page) {
-        Class cla = FragmentPage.getPageByValue(page.getValue());
-        FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
-        outChangeFragment(R.id.act_fl_content, presenter);
+        Class cla1 = FragmentPage.getPageByValue(FragmentPage.Main.getValue());
+        if (MyApplication.fragmentStack.isTopFragment(cla1)) {
+            Class cla = FragmentPage.getPageByValue(page.getValue());
+            FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+            presenter.onResume();
+            ((CommonTitleBar) get(R.id.frag_ct_title)).setListener(presenter.viewDelegate);
+            ((CommonTitleBar) get(R.id.frag_ct_title)).setDoubleClickListener(presenter.viewDelegate);
+            outChangeFragment(R.id.act_fl_content, presenter);
+        }
     }
 
     private void backOutPage(Class cla, Bundle bundle) {
-        FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
-        presenter.setArguments(bundle);
-        outChangeFragment(R.id.act_fl_content, presenter);
+        Class cla1 = FragmentPage.getPageByValue(FragmentPage.Main.getValue());
+        if (MyApplication.fragmentStack.isTopFragment(cla1)) {
+            FragmentPresenter presenter = MyApplication.fragmentStack.addFragment(cla);
+            presenter.setArguments(bundle);
+            presenter.onResume();
+            ((CommonTitleBar) get(R.id.frag_ct_title)).setListener(presenter.viewDelegate);
+            ((CommonTitleBar) get(R.id.frag_ct_title)).setDoubleClickListener(presenter.viewDelegate);
+            outChangeFragment(R.id.act_fl_content, presenter);
+        }
     }
 
     @Override

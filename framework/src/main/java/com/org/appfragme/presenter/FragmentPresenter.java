@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.Subject;
+import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.FragmentDelegate;
 
@@ -60,6 +61,9 @@ public abstract class FragmentPresenter<T extends FragmentDelegate> extends Frag
         try {
             viewDelegate = getDelegateClass().newInstance();
             viewDelegate.setCallBack(suject, callBack);
+            if (viewDelegate == null) XXXLog.e(" viewDelegate  " + viewDelegate);
+            ((ActivityPresenter) getActivity()).getTitleBar().setListener(viewDelegate);
+            ((ActivityPresenter) getActivity()).getTitleBar().setDoubleClickListener(viewDelegate);
         } catch (java.lang.InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -104,6 +108,9 @@ public abstract class FragmentPresenter<T extends FragmentDelegate> extends Frag
             try {
                 viewDelegate = getDelegateClass().newInstance();
                 viewDelegate.setCallBack(suject, callBack);
+                if (viewDelegate == null) XXXLog.e(" viewDelegate  " + viewDelegate);
+                ((ActivityPresenter) getActivity()).getTitleBar().setListener(viewDelegate);
+                ((ActivityPresenter) getActivity()).getTitleBar().setDoubleClickListener(viewDelegate);
             } catch (java.lang.InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

@@ -1278,7 +1278,6 @@ public class CommonTitleBar extends RelativeLayout implements View.OnClickListen
 
     public CommonTitleBar setListener(OnTitleBarListener listener) {
         this.listener = listener;
-        XXXLog.e("   listener    ?    " + this.listener);
         return this;
     }
 

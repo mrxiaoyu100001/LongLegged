@@ -1,7 +1,10 @@
 package com.xiaoyu.longlegged.delegate;
 
+import android.support.annotation.NonNull;
+
 import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.widget.ActionBar;
 import com.xiaoyu.longlegged.R;
 
 /**
@@ -21,5 +24,11 @@ public class OthorDelegate extends FragmentDelegate {
     @Override
     public int getRootLayoutId() {
         return R.layout.fragment_othor;
+    }
+
+    @Override
+    public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
+        super.setTitleBar(titleBar);
+
     }
 }

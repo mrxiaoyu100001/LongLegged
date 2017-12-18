@@ -71,6 +71,8 @@ public class ActionBar {
     private View viewStatusBarFill;                     // 状态栏填充视图
     private View viewBottomLine;                        // 分隔线视图
     private boolean fillStatusBar;                      // 是否撑起状态栏, true时,标题栏浸入状态栏
+    private boolean isShowStatusBar;                    // 是否填充状态栏
+    private int statusBarPic;                           // 状态栏背景图片
     private int titleBarColor;                          // 标题栏背景颜色
     private int titleBarHeight;                         // 标题栏高度
     private int statusBarColor;                         // 状态栏颜色
@@ -241,6 +243,24 @@ public class ActionBar {
 
     public int getRightType() {
         return rightType;
+    }
+
+    public int getStatusBarPic() {
+        return statusBarPic;
+    }
+
+    public ActionBar setStatusBarPic(int statusBarPic) {
+        this.statusBarPic = statusBarPic;
+        return this;
+    }
+
+    public boolean isShowStatusBar() {
+        return isShowStatusBar;
+    }
+
+    public ActionBar setShowStatusBar(boolean showStatusBar) {
+        isShowStatusBar = showStatusBar;
+        return this;
     }
 
     public ActionBar setRightType(int rightType) {

@@ -1,7 +1,10 @@
 package com.xiaoyu.longlegged.fragment;
 
+import android.os.Bundle;
+
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.databind.DataBinder;
+import com.org.appfragme.utils.Constant;
 import com.xiaoyu.longlegged.delegate.OthorDelegate;
 
 /**
@@ -26,5 +29,11 @@ public class OthorFragment extends DataBindFragment<OthorDelegate> {
     @Override
     protected Class<OthorDelegate> getDelegateClass() {
         return OthorDelegate.class;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+        super.initData(bundle);
+        viewDelegate.refreshTitle(bundle.getString(Constant.Constant_key));
     }
 }

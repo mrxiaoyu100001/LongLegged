@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.org.appfragme.view;
+package com.org.appfragme.view.base;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,9 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.org.appfragme.databind.CallBack;
-import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.databind.Subject;
-import com.org.appfragme.utils.XXXLog;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 

@@ -16,16 +16,9 @@
 package com.org.appfragme.presenter;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toolbar;
 import android.view.Menu;
 
-import com.org.appfragme.databind.Observer;
-import com.org.appfragme.utils.AnnotateUtil;
-import com.org.appfragme.utils.XXXLog;
-import com.org.appfragme.view.ActivityDelegate;
-import com.org.appfragme.view.IDelegate;
+import com.org.appfragme.view.base.ActivityDelegate;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 

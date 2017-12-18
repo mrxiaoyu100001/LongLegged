@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.org.appfragme.view;
+package com.org.appfragme.view.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,17 +24,11 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.org.appfragme.R;
-import com.org.appfragme.databind.CallBack;
-import com.org.appfragme.databind.DataBindFragment;
-import com.org.appfragme.databind.Subject;
 import com.org.appfragme.presenter.ActivityPresenter;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.widget.ActionBar;
-import com.org.appfragme.widget.CommonTitleBar;
 
 
 /**
@@ -103,7 +97,7 @@ public abstract class ActivityDelegate implements IDelegate, View.OnClickListene
     public <T extends View> T bindView(int id) {
         T view = (T) mViews.get(id);
         if (view == null) {
-            view = (T) rootView.findViewById(id);
+            if (rootView != null) view = (T) rootView.findViewById(id);
             mViews.put(id, view);
         }
         return view;

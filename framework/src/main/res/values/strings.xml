@@ -2,4 +2,6 @@
     <string name="app_name">Library</string>
 
     <string name="titlebar_search_hint">Search</string>
+    <string name="ensure">Ensure</string>
+    <string name="cancel">Cancel</string>
 </resources>

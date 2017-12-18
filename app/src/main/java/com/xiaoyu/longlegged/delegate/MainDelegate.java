@@ -9,8 +9,7 @@ import com.org.appfragme.databind.FragmentSuject;
 import com.org.appfragme.databind.Observer;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.utils.ActionBarHelper;
-import com.org.appfragme.utils.XXXLog;
-import com.org.appfragme.view.ActivityDelegate;
+import com.org.appfragme.view.base.ActivityDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.MyApplication;
@@ -106,11 +105,9 @@ public class MainDelegate extends ActivityDelegate implements Mediator, Observer
 
     private void backOutPage() {
         Class cla = FragmentPage.getPageByValue(FragmentPage.Main.getValue());
-        XXXLog.e("走不走啊？   " + MyApplication.fragmentStack.isTopFragment(cla));
         if (!MyApplication.fragmentStack.isTopFragment(cla)) {
             FragmentPresenter presenter = MyApplication.fragmentStack.getNextFragment();
             presenter.onResume();
-            XXXLog.e("走的哪个？   " + presenter);
             ((CommonTitleBar) get(R.id.frag_ct_title)).setListener(presenter.viewDelegate);
             ((CommonTitleBar) get(R.id.frag_ct_title)).setDoubleClickListener(presenter.viewDelegate);
             outChangeFragment(R.id.act_fl_content, presenter);

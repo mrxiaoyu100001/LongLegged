@@ -26,7 +26,6 @@ import android.widget.TextView;
 import com.org.appfragme.R;
 import com.org.appfragme.utils.AppUtils;
 import com.org.appfragme.utils.DensityUtils;
-import com.org.appfragme.utils.XXXLog;
 
 /**
  * 通用标题栏

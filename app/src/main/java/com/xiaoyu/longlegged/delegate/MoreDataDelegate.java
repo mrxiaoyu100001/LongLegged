@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.org.appfragme.utils.Constant;
 import com.org.appfragme.utils.DensityUtils;
 import com.org.appfragme.utils.RecyclerViewItemDecoration;
-import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.view.base.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.R;
@@ -92,7 +92,7 @@ public class MoreDataDelegate extends FragmentDelegate {
     public void widgetClick(View view) {
         super.widgetClick(view);
         Bundle bundle = new Bundle();
-        bundle.putString(Constant.Constant_key, "1234567890123456789");
+        bundle.putString(Constant.Constant_key, getActivity().getString(R.string.app_content));
         AppMethod.postShowWith(this.getActivity(), FragmentPage.Othor, bundle);
     }
 

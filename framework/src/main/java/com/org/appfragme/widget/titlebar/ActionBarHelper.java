@@ -86,7 +86,9 @@ public class ActionBarHelper {
                 titleBar.setVisibility(View.GONE);
             } else {
                 titleBar.setVisibility(View.VISIBLE);
-                titleBar.setLeftType(actionBar.getLeftType())
+                titleBar.setFillStatusBar(actionBar.isFillStatusBar())
+                        .setStatusBarPic(actionBar.getStatusBarPic())
+                        .setLeftType(actionBar.getLeftType())
                         .setLeftText(actionBar.getLeftText())
                         .setLeftTextColor(actionBar.getLeftTextColor())
                         .setLeftTextSize(actionBar.getLeftTextSize())
@@ -129,11 +131,14 @@ public class ActionBarHelper {
      * @return
      */
     public ActionBarHelper builderActionBar() {
-        actionBar.setShowTitleBar(true)
+        actionBar
+                .setShowTitleBar(true)
                 .setFillStatusBar(true)
+                .setStatusBarPic(0)
                 .setTitleBarColor(R.color.color_ffffff)
                 .setTitleBarHeight(44)
-                .setStatusBarColor(R.color.color_ffffff)
+                /*状态栏颜色*/
+//              .setStatusBarColor(R.color.color_ffffff)
                 .setShowBottomLine(true)
                 .setBottomLineColor(R.color.color_dddddd)
                 .setBottomElevation(5)

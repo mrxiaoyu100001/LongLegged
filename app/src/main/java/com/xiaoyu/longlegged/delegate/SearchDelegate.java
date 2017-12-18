@@ -5,8 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.org.appfragme.utils.Constant;
-import com.org.appfragme.view.ActivityDelegate;
-import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.view.base.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.R;
@@ -47,6 +46,7 @@ public class SearchDelegate extends FragmentDelegate implements View.OnClickList
     public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
         super.setTitleBar(titleBar);
         titleBar.setCenterText(R.string.main_sub)
+                .setTitleBarColor(R.color.color_A973FB)
                 .setCenterType(CommonTitleBar.TYPE_CENTER_TEXTVIEW)
                 .setCenterTextColor(R.color.color_ffffff);
     }

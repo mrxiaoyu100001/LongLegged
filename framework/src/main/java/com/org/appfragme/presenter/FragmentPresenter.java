@@ -27,8 +27,7 @@ import android.view.ViewGroup;
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.Subject;
 import com.org.appfragme.utils.XXXLog;
-import com.org.appfragme.view.ActivityDelegate;
-import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.view.base.FragmentDelegate;
 
 
 /**
@@ -67,6 +66,8 @@ public abstract class FragmentPresenter<T extends FragmentDelegate> extends Frag
         } catch (java.lang.InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }catch (NullPointerException e) {
             e.printStackTrace();
         }
     }

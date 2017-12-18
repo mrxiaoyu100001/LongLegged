@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.org.appfragme.utils.Constant;
 import com.org.appfragme.utils.ViewInject;
-import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.view.base.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.R;
@@ -42,13 +42,16 @@ public class MainFragDelegate extends FragmentDelegate {
     public void setTitleBar(@NonNull ActionBar titleBar) throws NullPointerException {
         super.setTitleBar(titleBar);
         titleBar.setShowTitleBar(true)
+                .setStatusBarColor(R.color.color_A973FB)
+                .setTitleBarColor(R.color.color_A973FB)
                 .setLeftImageResource(R.mipmap.main_left)
                 .setCenterType(CommonTitleBar.TYPE_CENTER_TEXTVIEW)
                 .setCenterText(R.string.app_name)
                 .setCenterTextColor(R.color.color_ffffff)
                 .setCenterTextSize(18)
                 .setRightType(CommonTitleBar.TYPE_RIGHT_IMAGEBUTTON)
-                .setRightImageResource(R.mipmap.main_search);
+                .setRightImageResource(R.mipmap.main_search)
+                .setFillStatusBar(true);
     }
 
     @Override

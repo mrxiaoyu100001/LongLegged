@@ -9,4 +9,28 @@
     <color name="color_dddddd">#ffdddddd</color>
     <color name="color_ff333333">#ff333333</color>
     <color name="color_666666">#ff666666</color>
+    <color name="color_00000000">#00000000</color>
+    <color name="colorLineGray">#DCDCDC</color>
+    <color name="colorAlertBg">#FFFFFF</color>
+    <color name="colorAlertBgPressed">#D6D3D6</color>
+    <color name="colorAlertLineGray">#DCDCDC</color>
+    <color name="colorAlertTitle">#393939</color>
+    <color name="colorAlertMessage">#393939</color>
+    <color name="colorAlertButton">#393939</color>
+
+    <color name="colorLoadingTextWeiBo">#f0f0f0</color>
+    <color name="colorLoadingText">#393939</color>
+    <color name="colorLoadingBg">#f5ffffff</color>
+    <color name="colorLoadingBgWei">#a5000000</color>
+
+    <color name="colorActionSheetWeiXinText">#393939</color>
+    <color name="colorActionSheetNormalItemText">#393939</color>
+    <color name="colorActionSheetTitleText">#969696</color>
+    <color name="colorActionSheetCancelText">#1382FF</color>
+    <color name="colorActionSheetItemText">#1382FF</color>
+    <color name="colorActionSheetEdgePressed">#F0F0F0</color>
+    <color name="colorActionSheetEdge">#FFFFFF</color>
+    <color name="colorActionSheetEdgeLineGray">#DCDCDC</color>
+
+    <color name="colorRadiusDefaultRipple">#c8cccccc</color>
 </resources>

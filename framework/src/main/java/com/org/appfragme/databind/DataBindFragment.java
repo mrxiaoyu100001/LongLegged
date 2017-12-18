@@ -21,8 +21,8 @@ import android.view.View;
 import com.org.appfragme.model.IModel;
 import com.org.appfragme.presenter.ActivityPresenter;
 import com.org.appfragme.presenter.FragmentPresenter;
-import com.org.appfragme.view.ActivityDelegate;
-import com.org.appfragme.view.FragmentDelegate;
+import com.org.appfragme.view.base.ActivityDelegate;
+import com.org.appfragme.view.base.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
 
 /**

@@ -3,7 +3,7 @@ package com.xiaoyu.longlegged.delegate;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.org.appfragme.view.base.FragmentDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.xiaoyu.longlegged.R;
 import com.xiaoyu.longlegged.base.FragmentPage;

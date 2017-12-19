@@ -16,26 +16,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
-    compile 'io.reactivex:rxjava:1.0.14'
-    compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.trello:rxlifecycle:0.4.0'
     compile 'com.trello:rxlifecycle-components:0.4.0'
-    compile 'com.squareup.okhttp:okhttp:2.7.2'
-    compile 'com.squareup.okio:okio:1.6.0'
-    compile 'com.f2prateek.rx.preferences:rx-preferences:1.0.1'
-    compile 'com.squareup.okhttp:okhttp:2.7.2'
-    compile 'com.squareup.okio:okio:1.6.0'
-    compile 'com.github.bumptech.glide:glide:4.0.0'
-    compile 'com.alibaba:fastjson:1.2.20'
+    compile 'com.vise.xiaoyaoyou:viseutils:1.1.0'
     testCompile 'junit:junit:4.12'
+    compile files('libs/netexpand.jar')
+    compile files('libs/UIWidget.jar')
+    compile files('libs/xsnow.jar')
 }

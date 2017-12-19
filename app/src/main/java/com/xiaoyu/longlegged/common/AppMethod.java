@@ -128,5 +128,4 @@ public class AppMethod {
         ActionBarHelper.getInstance().clearHelper();
         ActionBar.getInstance().clearActionBar();
     }
-
 }

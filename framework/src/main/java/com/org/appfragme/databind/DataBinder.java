@@ -16,7 +16,7 @@
 package com.org.appfragme.databind;
 
 import com.org.appfragme.model.IModel;
-import com.org.appfragme.view.base.IDelegate;
+import com.org.appfragme.view.IDelegate;
 
 /**
  * @Created: xiaoyu  on 2017.12.06 17:34.

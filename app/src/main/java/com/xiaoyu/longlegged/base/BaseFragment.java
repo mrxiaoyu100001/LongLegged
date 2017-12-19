@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.presenter.FragmentPresenter;
-import com.org.appfragme.view.base.IDelegate;
+import com.org.appfragme.view.IDelegate;
 
 /**
  * @Created: xiaoyu  on 2017.12.06 15:50.

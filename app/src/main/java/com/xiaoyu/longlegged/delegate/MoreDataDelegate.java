@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.org.appfragme.utils.Constant;
 import com.org.appfragme.utils.DensityUtils;
 import com.org.appfragme.utils.RecyclerViewItemDecoration;
-import com.org.appfragme.view.base.FragmentDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.R;

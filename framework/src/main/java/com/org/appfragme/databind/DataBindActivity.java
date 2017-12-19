@@ -19,7 +19,7 @@ import android.os.Bundle;
 
 import com.org.appfragme.model.IModel;
 import com.org.appfragme.presenter.ActivityPresenter;
-import com.org.appfragme.view.base.ActivityDelegate;
+import com.org.appfragme.view.ActivityDelegate;
 
 /**
  * @Created: xiaoyu  on 2017.12.04 15:20.

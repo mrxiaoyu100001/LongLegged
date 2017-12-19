@@ -18,7 +18,7 @@ package com.org.appfragme.presenter;
 import android.os.Bundle;
 import android.view.Menu;
 
-import com.org.appfragme.view.base.ActivityDelegate;
+import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 

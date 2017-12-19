@@ -9,7 +9,7 @@ import com.org.appfragme.databind.FragmentSuject;
 import com.org.appfragme.databind.Observer;
 import com.org.appfragme.presenter.FragmentPresenter;
 import com.org.appfragme.utils.ActionBarHelper;
-import com.org.appfragme.view.base.ActivityDelegate;
+import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.widget.ActionBar;
 import com.org.appfragme.widget.CommonTitleBar;
 import com.xiaoyu.longlegged.MyApplication;

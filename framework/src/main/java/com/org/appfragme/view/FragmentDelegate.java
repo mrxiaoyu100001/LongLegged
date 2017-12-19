@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.org.appfragme.view.base;
+package com.org.appfragme.view;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentTransaction;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.org.appfragme.R;
-import com.org.appfragme.presenter.ActivityPresenter;
-import com.org.appfragme.presenter.FragmentPresenter;
+import com.org.appfragme.databind.CallBack;
+import com.org.appfragme.databind.Subject;
 import com.org.appfragme.widget.ActionBar;
+import com.org.appfragme.widget.CommonTitleBar;
 
 
 /**
@@ -46,13 +44,15 @@ import com.org.appfragme.widget.ActionBar;
  * @Resources:
  * @Remark:
  */
-public abstract class ActivityDelegate implements IDelegate, View.OnClickListener {
+public abstract class FragmentDelegate implements IDelegate, View.OnClickListener,
+        CommonTitleBar.OnTitleBarListener, CommonTitleBar.OnTitleBarDoubleClickListener {
     protected final SparseArray<View> mViews = new SparseArray<View>();
     protected View rootView;
-    /*当前fragment*/
-    private FragmentPresenter currentFragment;
+    private CallBack callBack;
+    private Subject subject;
 
     public abstract int getRootLayoutId();
+
 
     @Override
     public void create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,7 +97,7 @@ public abstract class ActivityDelegate implements IDelegate, View.OnClickListene
     public <T extends View> T bindView(int id) {
         T view = (T) mViews.get(id);
         if (view == null) {
-            if (rootView != null) view = (T) rootView.findViewById(id);
+            view = (T) rootView.findViewById(id);
             mViews.put(id, view);
         }
         return view;
@@ -120,67 +120,37 @@ public abstract class ActivityDelegate implements IDelegate, View.OnClickListene
         return (T) rootView.getContext();
     }
 
-    /**
-     * 界面跳转
-     *
-     * @param resView
-     * @param mFragment
-     */
-    public void enterChangeFragment(int resView, FragmentPresenter mFragment) {
-        if (mFragment == null && mFragment.equals(currentFragment)) {
-            return;
-        }
-        FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out);
-        if (!mFragment.isAdded()) {
-            transaction.add(resView, mFragment, mFragment.getClass()
-                    .getName());
-            /*添加回退栈*/
-//            transaction.addToBackStack(mFragment.getClass().getName());
-        }
-        if (mFragment.isHidden()) {
-            transaction.show(mFragment);
-        }
-        if (currentFragment != null && currentFragment.isVisible()) {
-            transaction.hide(currentFragment);
-        }
-        currentFragment = mFragment;
-        transaction.commit();
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
     }
 
-    /**
-     * 界面回退
-     *
-     * @param resView
-     * @param mFragment
-     */
-    public void outChangeFragment(int resView, FragmentPresenter mFragment) {
-        if (mFragment == null && mFragment.equals(currentFragment)) {
-            return;
+    public void setCallBack(Subject context, CallBack callBack) {
+        this.callBack = callBack;
+        this.subject = context;
+    }
+
+    public void setResult(int resultCode, Bundle bundle) {
+        if (callBack != null) {
+            callBack.onActivityResult(resultCode, bundle);
         }
-        FragmentTransaction transaction = ((ActivityPresenter) getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out);
-        if (!mFragment.isAdded()) {
-            transaction.add(resView, mFragment, mFragment.getClass()
-                    .getName());
-            /*添加回退栈*/
-//            transaction.addToBackStack(mFragment.getClass().getName());
-        }
-        if (mFragment.isHidden()) {
-            transaction.show(mFragment);
-        }
-        if (currentFragment != null && currentFragment.isVisible()) {
-            transaction.hide(currentFragment);
-        }
-        currentFragment = mFragment;
-        transaction.commit();
     }
 
     public void finish() {
-        getActivity().finish();
+        if (subject != null) {
+            subject.notifyChange();
+        }
     }
 
-    public ActionBar getActionBar(Context context) {
-        return ActionBar.getInstance(context);
+    @Override
+    public void onBarClicked(View v, int action, String extra) {
+        //如果左侧点击事件是返回，则不用在子类重载这个方法
+        if (action == CommonTitleBar.ACTION_LEFT_TEXT ||
+                action == CommonTitleBar.ACTION_LEFT_BUTTON) {
+            finish();
+        }
+    }
+
+    @Override
+    public void onDoubleClicked(View v) {
     }
 }

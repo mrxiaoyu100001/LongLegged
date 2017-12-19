@@ -27,8 +27,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:recyclerview-v7:25.2.0'
-    compile 'com.android.support:multidex:1.0.1'
-    //支持activity左右滑动
     compile 'com.jude:swipebackhelper:2.1.5'
     testCompile 'junit:junit:4.12'
     compile project(':framework')

@@ -27,7 +27,7 @@ import android.view.ViewGroup;
 import com.org.appfragme.databind.CallBack;
 import com.org.appfragme.databind.Subject;
 import com.org.appfragme.utils.XXXLog;
-import com.org.appfragme.view.base.FragmentDelegate;
+import com.org.appfragme.view.FragmentDelegate;
 
 
 /**

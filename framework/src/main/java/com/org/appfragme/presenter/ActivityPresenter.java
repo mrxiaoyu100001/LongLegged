@@ -16,11 +16,11 @@
 package com.org.appfragme.presenter;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 
 import com.org.appfragme.view.ActivityDelegate;
 import com.org.appfragme.widget.CommonTitleBar;
-import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 
 /**
  * @Created: xiaoyu  on 2017.12.06 17:34.
@@ -33,7 +33,7 @@ import com.trello.rxlifecycle.components.support.RxFragmentActivity;
  * @Resources:
  * @Remark:
  */
-public abstract class ActivityPresenter<T extends ActivityDelegate> extends RxFragmentActivity {
+public abstract class ActivityPresenter<T extends ActivityDelegate> extends FragmentActivity {
     protected T viewDelegate;
 
     public ActivityPresenter() {

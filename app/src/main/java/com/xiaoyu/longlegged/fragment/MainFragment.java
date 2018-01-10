@@ -1,9 +1,21 @@
 package com.xiaoyu.longlegged.fragment;
 
+import android.os.Bundle;
+
+import com.alibaba.fastjson.JSON;
 import com.org.appfragme.databind.DataBindFragment;
 import com.org.appfragme.databind.DataBinder;
-import com.org.appfragme.utils.ViewInject;
+import com.org.appfragme.utils.XXXLog;
+import com.org.utillib.utils.AesUtil;
+import com.vise.log.ViseLog;
+import com.vise.netexpand.mode.ApiResult;
+import com.vise.netexpand.request.ApiPostRequest;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+import com.xiaoyu.longlegged.common.BaseUrl;
 import com.xiaoyu.longlegged.delegate.MainFragDelegate;
+import com.xiaoyu.longlegged.modle.request.LoginRequest;
+import com.xiaoyu.longlegged.modle.response.login.LoginResponse;
 
 /**
  * @Created: xiaoyu  on 2017.12.04 16:36.
@@ -32,5 +44,11 @@ public class MainFragment extends DataBindFragment<MainFragDelegate> {
     @Override
     public boolean onBackEvent() {
         return false;
+    }
+
+    @Override
+    protected void initData(Bundle bundle) {
+        super.initData(bundle);
+        XXXLog.e(" ----------------------------   initdata()   ");
     }
 }
